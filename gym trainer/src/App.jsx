@@ -1,18 +1,33 @@
 import React, { useState, useEffect } from "react";
 import { Dumbbell, Users, TrendingUp, Calendar, LogOut, User } from "lucide-react";
+import Header from "./components/Header.jsx";
+import Footer from "./components/Footer.jsx";
 import BMICalculator from "./components/BMICalculator.jsx";
 import ProgressTab from "./components/tabs/ProgressTab.jsx";
+import AboutUs from "./pages/AboutUs.jsx";
+import ContactUs from "./pages/ContactUs.jsx";
 import Button from "./components/ui/Button.jsx";
 import Card from "./components/ui/Card.jsx";
+import Input from "./components/ui/Input.jsx";
 import { MOCK_USERS, MOCK_PROGRESS } from "./data/mock.js";
 import { COACHES, INITIAL_REVIEWS, INITIAL_SCHEDULE, INITIAL_MEAL_PLAN } from "./data/constants.js";
 
 function App() {
   const [currentUser, setCurrentUser] = useState(null);
+  const [showLoginModal, setShowLoginModal] = useState(false);
+  const [showRegisterModal, setShowRegisterModal] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [activeTab, setActiveTab] = useState("home");
   const [progressData, setProgressData] = useState(MOCK_PROGRESS);
+  const [registerData, setRegisterData] = useState({
+    name: "",
+    email: "",
+    password: "",
+    phone: "",
+    address: "",
+    targetMuscle: "General Fitness",
+  });
 
   useEffect(() => {
     const savedUser = localStorage.getItem("gymUser");
@@ -29,9 +44,34 @@ function App() {
       localStorage.setItem("gymUser", JSON.stringify(user));
       setEmail("");
       setPassword("");
+      setShowLoginModal(false);
     } else {
       alert("Invalid credentials. Try: user@gym.lk / 123");
     }
+  };
+
+  const handleRegister = (e) => {
+    e.preventDefault();
+    const newUser = {
+      uid: `user${Date.now()}`,
+      ...registerData,
+      role: "user",
+      status: "active",
+      joinedAt: new Date().toISOString(),
+    };
+    MOCK_USERS.push(newUser);
+    setCurrentUser(newUser);
+    localStorage.setItem("gymUser", JSON.stringify(newUser));
+    setRegisterData({
+      name: "",
+      email: "",
+      password: "",
+      phone: "",
+      address: "",
+      targetMuscle: "General Fitness",
+    });
+    setShowRegisterModal(false);
+    alert("Registration successful! Welcome to Gym Trainer!");
   };
 
   const handleLogout = () => {
@@ -57,119 +97,218 @@ function App() {
   if (!currentUser) {
     return (
       <div className="min-h-screen bg-gradient-to-br from-black via-neutral-900 to-black text-white">
-        {/* Hero Section */}
-        <div className="relative min-h-screen flex items-center justify-center px-4">
-          <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1534438327276-14e5300c3a48?q=80&w=2070')] bg-cover bg-center opacity-20"></div>
-          
-          <div className="relative z-10 max-w-6xl mx-auto text-center">
-            <div className="flex items-center justify-center gap-3 mb-6">
-              <Dumbbell className="w-16 h-16 text-orange-500" />
-              <h1 className="text-7xl font-black uppercase italic">
-                <span className="text-white">Gym</span>
-                <span className="text-orange-500"> Trainer</span>
-              </h1>
-            </div>
-            
-            <p className="text-2xl text-gray-300 mb-12 max-w-2xl mx-auto">
-              Transform Your Body, Transform Your Life
-            </p>
+        <Header
+          onLoginClick={() => setShowLoginModal(true)}
+          onRegisterClick={() => setShowRegisterModal(true)}
+          activeTab={activeTab}
+          setActiveTab={setActiveTab}
+        />
 
-            {/* Login Form */}
-            <div className="max-w-md mx-auto bg-neutral-900/80 backdrop-blur-sm border border-neutral-800 rounded-2xl p-8 mb-12">
+        {/* Login Modal */}
+        {showLoginModal && (
+          <div className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+            <div className="bg-neutral-900 border border-neutral-800 rounded-2xl p-8 max-w-md w-full">
               <h2 className="text-2xl font-bold mb-6 text-orange-500">Member Login</h2>
               <form onSubmit={handleLogin} className="space-y-4">
-                <input
+                <Input
                   type="email"
                   placeholder="Email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  className="w-full bg-neutral-800 border border-neutral-700 rounded-xl px-4 py-3 text-white focus:border-orange-500 outline-none"
                   required
                 />
-                <input
+                <Input
                   type="password"
                   placeholder="Password"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  className="w-full bg-neutral-800 border border-neutral-700 rounded-xl px-4 py-3 text-white focus:border-orange-500 outline-none"
                   required
                 />
-                <Button type="submit" className="w-full">
-                  Login
-                </Button>
+                <div className="flex gap-3">
+                  <Button type="submit" className="flex-1">
+                    Login
+                  </Button>
+                  <Button
+                    type="button"
+                    variant="outline"
+                    onClick={() => setShowLoginModal(false)}
+                    className="flex-1"
+                  >
+                    Cancel
+                  </Button>
+                </div>
               </form>
-              <p className="text-sm text-gray-400 mt-4">
+              <p className="text-sm text-gray-400 mt-4 text-center">
                 Demo: user@gym.lk / 123
               </p>
             </div>
+          </div>
+        )}
 
-            {/* Features */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16">
-              <Card className="text-center">
-                <Users className="w-12 h-12 text-orange-500 mx-auto mb-4" />
-                <h3 className="text-xl font-bold mb-2">Expert Coaches</h3>
-                <p className="text-gray-400">Professional trainers to guide you</p>
-              </Card>
-              <Card className="text-center">
-                <TrendingUp className="w-12 h-12 text-orange-500 mx-auto mb-4" />
-                <h3 className="text-xl font-bold mb-2">Track Progress</h3>
-                <p className="text-gray-400">Monitor your fitness journey</p>
-              </Card>
-              <Card className="text-center">
-                <Calendar className="w-12 h-12 text-orange-500 mx-auto mb-4" />
-                <h3 className="text-xl font-bold mb-2">Custom Plans</h3>
-                <p className="text-gray-400">Personalized workout schedules</p>
-              </Card>
+        {/* Register Modal */}
+        {showRegisterModal && (
+          <div className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4 overflow-y-auto">
+            <div className="bg-neutral-900 border border-neutral-800 rounded-2xl p-8 max-w-md w-full my-8">
+              <h2 className="text-2xl font-bold mb-6 text-orange-500">Register Now</h2>
+              <form onSubmit={handleRegister} className="space-y-4">
+                <Input
+                  type="text"
+                  placeholder="Full Name"
+                  value={registerData.name}
+                  onChange={(e) => setRegisterData({ ...registerData, name: e.target.value })}
+                  required
+                />
+                <Input
+                  type="email"
+                  placeholder="Email"
+                  value={registerData.email}
+                  onChange={(e) => setRegisterData({ ...registerData, email: e.target.value })}
+                  required
+                />
+                <Input
+                  type="password"
+                  placeholder="Password"
+                  value={registerData.password}
+                  onChange={(e) => setRegisterData({ ...registerData, password: e.target.value })}
+                  required
+                />
+                <Input
+                  type="tel"
+                  placeholder="Phone Number"
+                  value={registerData.phone}
+                  onChange={(e) => setRegisterData({ ...registerData, phone: e.target.value })}
+                  required
+                />
+                <Input
+                  type="text"
+                  placeholder="Address"
+                  value={registerData.address}
+                  onChange={(e) => setRegisterData({ ...registerData, address: e.target.value })}
+                  required
+                />
+                <select
+                  value={registerData.targetMuscle}
+                  onChange={(e) => setRegisterData({ ...registerData, targetMuscle: e.target.value })}
+                  className="w-full bg-neutral-800 border border-neutral-700 rounded-xl px-4 py-3 text-white focus:border-orange-500 outline-none"
+                >
+                  <option value="General Fitness">General Fitness</option>
+                  <option value="Weight Loss">Weight Loss</option>
+                  <option value="Muscle Gain">Muscle Gain</option>
+                  <option value="Hypertrophy">Hypertrophy</option>
+                  <option value="Strength">Strength</option>
+                  <option value="Endurance">Endurance</option>
+                </select>
+                <div className="flex gap-3">
+                  <Button type="submit" className="flex-1">
+                    Register
+                  </Button>
+                  <Button
+                    type="button"
+                    variant="outline"
+                    onClick={() => setShowRegisterModal(false)}
+                    className="flex-1"
+                  >
+                    Cancel
+                  </Button>
+                </div>
+              </form>
             </div>
           </div>
-        </div>
+        )}
 
-        {/* BMI Calculator Section */}
-        <BMICalculator />
-
-        {/* Coaches Section */}
-        <div className="max-w-6xl mx-auto px-4 py-20">
-          <h2 className="text-4xl font-black text-center mb-12 uppercase italic">
-            Meet Our <span className="text-orange-500">Coaches</span>
-          </h2>
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
-            {COACHES.map((coach) => (
-              <Card key={coach.id} className="text-center">
-                <img
-                  src={coach.img}
-                  alt={coach.name}
-                  className="w-full h-48 object-cover rounded-xl mb-4"
-                />
-                <h3 className="text-xl font-bold">{coach.name}</h3>
-                <p className="text-orange-500">{coach.role}</p>
-              </Card>
-            ))}
-          </div>
-        </div>
-
-        {/* Reviews Section */}
-        <div className="max-w-4xl mx-auto px-4 py-20">
-          <h2 className="text-4xl font-black text-center mb-12 uppercase italic">
-            Member <span className="text-orange-500">Reviews</span>
-          </h2>
-          <div className="space-y-4">
-            {INITIAL_REVIEWS.map((review) => (
-              <Card key={review.id}>
-                <div className="flex items-start gap-4">
-                  <div className="flex-1">
-                    <h4 className="font-bold text-lg">{review.name}</h4>
-                    <p className="text-gray-400 mt-2">{review.text}</p>
-                    <div className="flex gap-1 mt-2">
-                      {[...Array(review.rating)].map((_, i) => (
-                        <span key={i} className="text-orange-500">★</span>
-                      ))}
-                    </div>
-                  </div>
+        {activeTab === "home" && (
+          <>
+            {/* Hero Section */}
+            <div className="relative min-h-screen flex items-center justify-center px-4">
+              <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1534438327276-14e5300c3a48?q=80&w=2070')] bg-cover bg-center opacity-20"></div>
+              
+              <div className="relative z-10 max-w-6xl mx-auto text-center">
+                <div className="flex items-center justify-center gap-3 mb-6">
+                  <Dumbbell className="w-16 h-16 text-orange-500" />
+                  <h1 className="text-7xl font-black uppercase italic">
+                    <span className="text-white">Gym</span>
+                    <span className="text-orange-500"> Trainer</span>
+                  </h1>
                 </div>
-              </Card>
-            ))}
-          </div>
-        </div>
+                
+                <p className="text-2xl text-gray-300 mb-12 max-w-2xl mx-auto">
+                  Transform Your Body, Transform Your Life
+                </p>
+
+                {/* Features */}
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16">
+                  <Card className="text-center">
+                    <Users className="w-12 h-12 text-orange-500 mx-auto mb-4" />
+                    <h3 className="text-xl font-bold mb-2">Expert Coaches</h3>
+                    <p className="text-gray-400">Professional trainers to guide you</p>
+                  </Card>
+                  <Card className="text-center">
+                    <TrendingUp className="w-12 h-12 text-orange-500 mx-auto mb-4" />
+                    <h3 className="text-xl font-bold mb-2">Track Progress</h3>
+                    <p className="text-gray-400">Monitor your fitness journey</p>
+                  </Card>
+                  <Card className="text-center">
+                    <Calendar className="w-12 h-12 text-orange-500 mx-auto mb-4" />
+                    <h3 className="text-xl font-bold mb-2">Custom Plans</h3>
+                    <p className="text-gray-400">Personalized workout schedules</p>
+                  </Card>
+                </div>
+              </div>
+            </div>
+
+            {/* BMI Calculator Section */}
+            <BMICalculator />
+
+            {/* Coaches Section */}
+            <div className="max-w-6xl mx-auto px-4 py-20">
+              <h2 className="text-4xl font-black text-center mb-12 uppercase italic">
+                Meet Our <span className="text-orange-500">Coaches</span>
+              </h2>
+              <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
+                {COACHES.map((coach) => (
+                  <Card key={coach.id} className="text-center">
+                    <img
+                      src={coach.img}
+                      alt={coach.name}
+                      className="w-full h-48 object-cover rounded-xl mb-4"
+                    />
+                    <h3 className="text-xl font-bold">{coach.name}</h3>
+                    <p className="text-orange-500">{coach.role}</p>
+                  </Card>
+                ))}
+              </div>
+            </div>
+
+            {/* Reviews Section */}
+            <div className="max-w-4xl mx-auto px-4 py-20">
+              <h2 className="text-4xl font-black text-center mb-12 uppercase italic">
+                Member <span className="text-orange-500">Reviews</span>
+              </h2>
+              <div className="space-y-4">
+                {INITIAL_REVIEWS.map((review) => (
+                  <Card key={review.id}>
+                    <div className="flex items-start gap-4">
+                      <div className="flex-1">
+                        <h4 className="font-bold text-lg">{review.name}</h4>
+                        <p className="text-gray-400 mt-2">{review.text}</p>
+                        <div className="flex gap-1 mt-2">
+                          {[...Array(review.rating)].map((_, i) => (
+                            <span key={i} className="text-orange-500">★</span>
+                          ))}
+                        </div>
+                      </div>
+                    </div>
+                  </Card>
+                ))}
+              </div>
+            </div>
+          </>
+        )}
+
+        {activeTab === "about" && <AboutUs />}
+        {activeTab === "contact" && <ContactUs />}
+
+        <Footer />
       </div>
     );
   }

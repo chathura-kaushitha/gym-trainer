@@ -12,7 +12,7 @@ export default function Header({ onLoginClick, onRegisterClick, activeTab, setAc
   ];
 
   return (
-    <header className="bg-neutral-900/95 backdrop-blur-lg border-b border-neutral-800 sticky top-0 z-50 shadow-2xl">
+    <header className="bg-neutral-950 border-b border-neutral-800 sticky top-0 z-50 shadow-2xl">
       <div className="max-w-7xl mx-auto px-4 py-4">
         <div className="flex items-center justify-between">
           {/* Logo */}

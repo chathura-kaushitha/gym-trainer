@@ -128,7 +128,7 @@ function App() {
 
         {/* Auth Modal (Login/Register) */}
         {showAuthModal && (
-          <div className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4 overflow-y-auto">
+          <div className="fixed inset-0 bg-black/90 z-50 flex items-center justify-center p-4 overflow-y-auto">
             <div className="bg-gradient-to-br from-neutral-900 to-black border-2 border-neutral-800 rounded-2xl p-8 max-w-md w-full my-8 shadow-2xl">
               <h2 className="text-3xl font-black mb-6 uppercase italic text-center">
                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-500 to-red-600">

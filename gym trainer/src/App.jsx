@@ -17,8 +17,8 @@ import { COACHES, INITIAL_REVIEWS } from "./data/constants.js";
 
 function App() {
   const [currentUser, setCurrentUser] = useState(null);
-  const [showLoginModal, setShowLoginModal] = useState(false);
-  const [showRegisterModal, setShowRegisterModal] = useState(false);
+  const [showAuthModal, setShowAuthModal] = useState(false);
+  const [authMode, setAuthMode] = useState("login"); // "login" or "register"
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [activeTab, setActiveTab] = useState("overview");
@@ -47,7 +47,7 @@ function App() {
       localStorage.setItem("gymUser", JSON.stringify(user));
       setEmail("");
       setPassword("");
-      setShowLoginModal(false);
+      setShowAuthModal(false);
       setActiveTab("overview");
     } else {
       alert("Invalid credentials. Try: user@gym.lk / 123");
@@ -74,7 +74,7 @@ function App() {
       address: "",
       targetMuscle: "General Fitness",
     });
-    setShowRegisterModal(false);
+    setShowAuthModal(false);
     setActiveTab("overview");
     alert("Registration successful! Welcome to Gym Trainer!");
   };
@@ -114,120 +114,149 @@ function App() {
     return (
       <div className="min-h-screen bg-gradient-to-br from-black via-neutral-900 to-black text-white">
         <Header
-          onLoginClick={() => setShowLoginModal(true)}
-          onRegisterClick={() => setShowRegisterModal(true)}
+          onLoginClick={() => {
+            setAuthMode("login");
+            setShowAuthModal(true);
+          }}
+          onRegisterClick={() => {
+            setAuthMode("register");
+            setShowAuthModal(true);
+          }}
           activeTab={activeTab}
           setActiveTab={setActiveTab}
         />
 
-        {/* Login Modal */}
-        {showLoginModal && (
-          <div className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4">
-            <div className="bg-neutral-900 border border-neutral-800 rounded-2xl p-8 max-w-md w-full">
-              <h2 className="text-2xl font-bold mb-6 text-orange-500">Member Login</h2>
-              <form onSubmit={handleLogin} className="space-y-4">
-                <Input
-                  type="email"
-                  placeholder="Email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  required
-                />
-                <Input
-                  type="password"
-                  placeholder="Password"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  required
-                />
-                <div className="flex gap-3">
-                  <Button type="submit" className="flex-1">
-                    Login
-                  </Button>
-                  <Button
-                    type="button"
-                    variant="outline"
-                    onClick={() => setShowLoginModal(false)}
-                    className="flex-1"
-                  >
-                    Cancel
-                  </Button>
-                </div>
-              </form>
-              <p className="text-sm text-gray-400 mt-4 text-center">
-                Demo: user@gym.lk / 123
-              </p>
-            </div>
-          </div>
-        )}
-
-        {/* Register Modal */}
-        {showRegisterModal && (
+        {/* Auth Modal (Login/Register) */}
+        {showAuthModal && (
           <div className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4 overflow-y-auto">
-            <div className="bg-neutral-900 border border-neutral-800 rounded-2xl p-8 max-w-md w-full my-8">
-              <h2 className="text-2xl font-bold mb-6 text-orange-500">Register Now</h2>
-              <form onSubmit={handleRegister} className="space-y-4">
-                <Input
-                  type="text"
-                  placeholder="Full Name"
-                  value={registerData.name}
-                  onChange={(e) => setRegisterData({ ...registerData, name: e.target.value })}
-                  required
-                />
-                <Input
-                  type="email"
-                  placeholder="Email"
-                  value={registerData.email}
-                  onChange={(e) => setRegisterData({ ...registerData, email: e.target.value })}
-                  required
-                />
-                <Input
-                  type="password"
-                  placeholder="Password"
-                  value={registerData.password}
-                  onChange={(e) => setRegisterData({ ...registerData, password: e.target.value })}
-                  required
-                />
-                <Input
-                  type="tel"
-                  placeholder="Phone Number"
-                  value={registerData.phone}
-                  onChange={(e) => setRegisterData({ ...registerData, phone: e.target.value })}
-                  required
-                />
-                <Input
-                  type="text"
-                  placeholder="Address"
-                  value={registerData.address}
-                  onChange={(e) => setRegisterData({ ...registerData, address: e.target.value })}
-                  required
-                />
-                <select
-                  value={registerData.targetMuscle}
-                  onChange={(e) => setRegisterData({ ...registerData, targetMuscle: e.target.value })}
-                  className="w-full bg-neutral-800 border border-neutral-700 rounded-xl px-4 py-3 text-white focus:border-orange-500 outline-none"
-                >
-                  <option value="General Fitness">General Fitness</option>
-                  <option value="Weight Loss">Weight Loss</option>
-                  <option value="Muscle Gain">Muscle Gain</option>
-                  <option value="Hypertrophy">Hypertrophy</option>
-                  <option value="Strength">Strength</option>
-                  <option value="Endurance">Endurance</option>
-                </select>
-                <div className="flex gap-3">
-                  <Button type="submit" className="flex-1">
-                    Register
-                  </Button>
-                  <Button
-                    type="button"
-                    variant="outline"
-                    onClick={() => setShowRegisterModal(false)}
-                    className="flex-1"
+            <div className="bg-gradient-to-br from-neutral-900 to-black border-2 border-neutral-800 rounded-2xl p-8 max-w-md w-full my-8 shadow-2xl">
+              <h2 className="text-3xl font-black mb-6 uppercase italic text-center">
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-500 to-red-600">
+                  {authMode === "login" ? "Welcome Back" : "Join Us"}
+                </span>
+              </h2>
+
+              {authMode === "login" ? (
+                <form onSubmit={handleLogin} className="space-y-4">
+                  <Input
+                    type="email"
+                    placeholder="Email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    required
+                  />
+                  <Input
+                    type="password"
+                    placeholder="Password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    required
+                  />
+                  <div className="flex gap-3">
+                    <Button type="submit" className="flex-1">
+                      Login
+                    </Button>
+                    <Button
+                      type="button"
+                      variant="outline"
+                      onClick={() => setShowAuthModal(false)}
+                      className="flex-1"
+                    >
+                      Cancel
+                    </Button>
+                  </div>
+                  <p className="text-sm text-gray-400 mt-4 text-center">
+                    Demo: user@gym.lk / 123
+                  </p>
+                  <div className="text-center mt-4 pt-4 border-t border-neutral-800">
+                    <p className="text-gray-400 text-sm">
+                      Don't have an account?{" "}
+                      <button
+                        type="button"
+                        onClick={() => setAuthMode("register")}
+                        className="text-orange-500 font-bold hover:text-orange-400 transition-colors"
+                      >
+                        Register here
+                      </button>
+                    </p>
+                  </div>
+                </form>
+              ) : (
+                <form onSubmit={handleRegister} className="space-y-4">
+                  <Input
+                    type="text"
+                    placeholder="Full Name"
+                    value={registerData.name}
+                    onChange={(e) => setRegisterData({ ...registerData, name: e.target.value })}
+                    required
+                  />
+                  <Input
+                    type="email"
+                    placeholder="Email"
+                    value={registerData.email}
+                    onChange={(e) => setRegisterData({ ...registerData, email: e.target.value })}
+                    required
+                  />
+                  <Input
+                    type="password"
+                    placeholder="Password"
+                    value={registerData.password}
+                    onChange={(e) => setRegisterData({ ...registerData, password: e.target.value })}
+                    required
+                  />
+                  <Input
+                    type="tel"
+                    placeholder="Phone Number"
+                    value={registerData.phone}
+                    onChange={(e) => setRegisterData({ ...registerData, phone: e.target.value })}
+                    required
+                  />
+                  <Input
+                    type="text"
+                    placeholder="Address"
+                    value={registerData.address}
+                    onChange={(e) => setRegisterData({ ...registerData, address: e.target.value })}
+                    required
+                  />
+                  <select
+                    value={registerData.targetMuscle}
+                    onChange={(e) => setRegisterData({ ...registerData, targetMuscle: e.target.value })}
+                    className="w-full bg-neutral-800 border border-neutral-700 rounded-xl px-4 py-3 text-white focus:border-orange-500 outline-none"
                   >
-                    Cancel
-                  </Button>
-                </div>
-              </form>
+                    <option value="General Fitness">General Fitness</option>
+                    <option value="Weight Loss">Weight Loss</option>
+                    <option value="Muscle Gain">Muscle Gain</option>
+                    <option value="Hypertrophy">Hypertrophy</option>
+                    <option value="Strength">Strength</option>
+                    <option value="Endurance">Endurance</option>
+                  </select>
+                  <div className="flex gap-3">
+                    <Button type="submit" className="flex-1">
+                      Register
+                    </Button>
+                    <Button
+                      type="button"
+                      variant="outline"
+                      onClick={() => setShowAuthModal(false)}
+                      className="flex-1"
+                    >
+                      Cancel
+                    </Button>
+                  </div>
+                  <div className="text-center mt-4 pt-4 border-t border-neutral-800">
+                    <p className="text-gray-400 text-sm">
+                      Already have an account?{" "}
+                      <button
+                        type="button"
+                        onClick={() => setAuthMode("login")}
+                        className="text-orange-500 font-bold hover:text-orange-400 transition-colors"
+                      >
+                        Login here
+                      </button>
+                    </p>
+                  </div>
+                </form>
+              )}
             </div>
           </div>
         )}

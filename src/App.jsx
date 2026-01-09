@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { Dumbbell, Users, TrendingUp, Calendar, LogOut, User, Menu, X } from "lucide-react";
-import { auth, googleProvider } from "./firebase";
-import { signInWithPopup, signInWithEmailAndPassword, createUserWithEmailAndPassword, signOut, onAuthStateChanged } from "firebase/auth";
 import Header from "./components/Header.jsx";
 import Footer from "./components/Footer.jsx";
 import BMICalculator from "./components/BMICalculator.jsx";
@@ -43,99 +41,69 @@ function App() {
   const [viewingUser, setViewingUser] = useState(null); // For admin impersonation
 
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (firebaseUser) => {
-      if (firebaseUser) {
-        // Here we would typically fetch the user role from Firestore.
-        // For now, we'll try to match with mock users or default to "user"
-        const existingMockUser = MOCK_USERS.find(u => u.email === firebaseUser.email);
-
-        const user = {
-          uid: firebaseUser.uid,
-          email: firebaseUser.email,
-          name: firebaseUser.displayName || existingMockUser?.name || "User",
-          role: existingMockUser?.role || "user", // Default to user if not found in mock
-          photoURL: firebaseUser.photoURL,
-          status: "active"
-        };
-        setCurrentUser(user);
-
-        // Also ensure user is in our "database" (mock state) so admin can see them
-        setUsers(prevUsers => {
-          if (!prevUsers.find(u => u.uid === user.uid)) {
-            return [...prevUsers, user];
-          }
-          return prevUsers;
-        });
-
-      } else {
-        setCurrentUser(null);
-      }
-    });
-
-    return () => unsubscribe();
+    const savedUser = localStorage.getItem("gymUser");
+    if (savedUser) {
+      setCurrentUser(JSON.parse(savedUser));
+    }
   }, []);
 
-  const handleLogin = async (e) => {
+  const handleLogin = (e) => {
     e.preventDefault();
-    try {
-      await signInWithEmailAndPassword(auth, email, password);
+    const user = users.find((u) => u.email === email && u.password === password);
+    if (user) {
+      if (user.status === "pending") {
+        alert("Your account is pending approval by the gym owner.");
+        return;
+      }
+      setCurrentUser(user);
+      localStorage.setItem("gymUser", JSON.stringify(user));
       setEmail("");
       setPassword("");
       setShowAuthModal(false);
-    } catch (error) {
-      console.error("Login Error:", error);
-      alert("Login failed: " + error.message);
+      setActiveTab(user.role === "user" ? "overview" : "dashboard");
+    } else {
+      alert("Invalid credentials. Try: user@gym.lk / 123");
     }
   };
 
-  const handleGoogleSignIn = async () => {
-    try {
-      await signInWithPopup(auth, googleProvider);
-      setShowAuthModal(false);
-    } catch (error) {
-      console.error("Google Sign-In Error:", error);
-      alert("Google Sign-In failed: " + error.message);
-    }
-  };
-
-  const handleRegister = async (e) => {
+  const handleRegister = (e) => {
     e.preventDefault();
-    try {
-      await createUserWithEmailAndPassword(auth, registerData.email, registerData.password);
-      // Additional user data should be saved to Firestore here...
-      setRegisterData({
-        name: "",
-        email: "",
-        password: "",
-        phone: "",
-        address: "",
-        targetMuscle: "General Fitness",
-      });
-      setShowAuthModal(false);
-      alert("Registration successful!");
-    } catch (error) {
-      console.error("Registration Error:", error);
-      alert("Registration failed: " + error.message);
-    }
+    const newUser = {
+      uid: `user${Date.now()}`,
+      ...registerData,
+      role: "user",
+      status: "pending", // Default to pending
+      joinedAt: new Date().toISOString(),
+    };
+    setUsers([...users, newUser]);
+    // Do NOT auto-login. Wait for approval.
+    // setCurrentUser(newUser); 
+    // localStorage.setItem("gymUser", JSON.stringify(newUser));
+    setRegisterData({
+      name: "",
+      email: "",
+      password: "",
+      phone: "",
+      address: "",
+      targetMuscle: "General Fitness",
+    });
+    setShowAuthModal(false);
+    alert("Registration successful! Please wait for admin approval to login.");
   };
 
-  const handleLogout = async () => {
-    try {
-      await signOut(auth);
-      setActiveTab("home");
-    } catch (error) {
-      console.error("Logout Error:", error);
-    }
+  const handleLogout = () => {
+    setCurrentUser(null);
+    localStorage.removeItem("gymUser");
+    setActiveTab("home");
   };
 
   const handleUpdateProfile = (updatedUser) => {
     setCurrentUser(updatedUser);
-    // In a real app, we would update Firestore here
-    const userIndex = users.findIndex(u => u.uid === updatedUser.uid);
+    localStorage.setItem("gymUser", JSON.stringify(updatedUser));
+    // Update in MOCK_USERS as well if needed, but for now local state is enough
+    const userIndex = MOCK_USERS.findIndex(u => u.uid === updatedUser.uid);
     if (userIndex !== -1) {
-      const newUsers = [...users];
-      newUsers[userIndex] = updatedUser;
-      setUsers(newUsers);
+      MOCK_USERS[userIndex] = updatedUser;
     }
     alert("Profile updated successfully!");
   };
@@ -198,27 +166,17 @@ function App() {
                     onChange={(e) => setPassword(e.target.value)}
                     required
                   />
-                  <div className="flex gap-3 flex-col">
-                    <div className="flex gap-3">
-                      <Button type="submit" className="flex-1">
-                        Login
-                      </Button>
-                      <Button
-                        type="button"
-                        variant="outline"
-                        onClick={() => setShowAuthModal(false)}
-                        className="flex-1"
-                      >
-                        Cancel
-                      </Button>
-                    </div>
+                  <div className="flex gap-3">
+                    <Button type="submit" className="flex-1">
+                      Login
+                    </Button>
                     <Button
                       type="button"
-                      onClick={handleGoogleSignIn}
-                      className="w-full bg-white text-black hover:bg-gray-100 font-bold flex items-center justify-center gap-2"
+                      variant="outline"
+                      onClick={() => setShowAuthModal(false)}
+                      className="flex-1"
                     >
-                      <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" className="w-5 h-5" alt="Google" />
-                      Sign in with Google
+                      Cancel
                     </Button>
                   </div>
                   <p className="text-sm text-gray-400 mt-4 text-center">

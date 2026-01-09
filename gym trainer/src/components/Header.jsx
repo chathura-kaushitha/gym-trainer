@@ -12,7 +12,7 @@ export default function Header({ onLoginClick, onRegisterClick, activeTab, setAc
   ];
 
   return (
-    <header className="bg-neutral-950 border-b border-neutral-800 sticky top-0 z-50 shadow-2xl">
+    <header className="bg-neutral-950 border-b border-neutral-800 sticky top-0 z-50">
       <div className="max-w-7xl mx-auto px-4 py-4">
         <div className="flex items-center justify-between">
           {/* Logo */}
@@ -30,11 +30,10 @@ export default function Header({ onLoginClick, onRegisterClick, activeTab, setAc
               <button
                 key={link.id}
                 onClick={() => setActiveTab(link.id)}
-                className={`font-semibold transition-colors ${
-                  activeTab === link.id
-                    ? "text-orange-500"
-                    : "text-gray-400 hover:text-white"
-                }`}
+                className={`font-semibold transition-colors ${activeTab === link.id
+                  ? "text-orange-500"
+                  : "text-gray-400 hover:text-white"
+                  }`}
               >
                 {link.label}
               </button>
@@ -43,7 +42,11 @@ export default function Header({ onLoginClick, onRegisterClick, activeTab, setAc
 
           {/* Desktop Auth Button */}
           <div className="hidden md:flex items-center gap-3">
-            <Button onClick={onLoginClick} variant="primary" className="px-8 py-2">
+            <Button
+              onClick={onLoginClick}
+              variant="flat"
+              className="px-6 py-2"
+            >
               JOIN NOW
             </Button>
           </div>
@@ -68,18 +71,21 @@ export default function Header({ onLoginClick, onRegisterClick, activeTab, setAc
                     setActiveTab(link.id);
                     setMobileMenuOpen(false);
                   }}
-                  className={`font-semibold text-left transition-colors ${
-                    activeTab === link.id
-                      ? "text-orange-500"
-                      : "text-gray-400 hover:text-white"
-                  }`}
+                  className={`font-semibold text-left transition-colors ${activeTab === link.id
+                    ? "text-orange-500"
+                    : "text-gray-400 hover:text-white"
+                    }`}
                 >
                   {link.label}
                 </button>
               ))}
             </nav>
             <div className="flex flex-col gap-2">
-              <Button onClick={onLoginClick} variant="primary" className="w-full">
+              <Button
+                onClick={onLoginClick}
+                variant="flat"
+                className="w-full"
+              >
                 JOIN NOW
               </Button>
             </div>

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Dumbbell, Users, TrendingUp, Calendar, LogOut, User } from "lucide-react";
+import { Dumbbell, Users, TrendingUp, Calendar, LogOut, User, Menu, X } from "lucide-react";
 import Header from "./components/Header.jsx";
 import Footer from "./components/Footer.jsx";
 import BMICalculator from "./components/BMICalculator.jsx";
@@ -9,9 +9,12 @@ import ScheduleTab from "./components/tabs/ScheduleTab.jsx";
 import ProfileTab from "./components/tabs/ProfileTab.jsx";
 import AboutUs from "./pages/AboutUs.jsx";
 import ContactUs from "./pages/ContactUs.jsx";
+import LandingPage from "./pages/LandingPage.jsx";
 import Button from "./components/ui/Button.jsx";
 import Card from "./components/ui/Card.jsx";
 import Input from "./components/ui/Input.jsx";
+import AdminDashboard from "./components/admin/AdminDashboard.jsx";
+import UserDetailView from "./components/admin/UserDetailView.jsx";
 import { MOCK_USERS, MOCK_PROGRESS } from "./data/mock.js";
 import { COACHES, INITIAL_REVIEWS } from "./data/constants.js";
 
@@ -22,6 +25,7 @@ function App() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [activeTab, setActiveTab] = useState("overview");
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [progressData, setProgressData] = useState(MOCK_PROGRESS);
   const [registerData, setRegisterData] = useState({
     name: "",
@@ -32,6 +36,10 @@ function App() {
     targetMuscle: "General Fitness",
   });
 
+  // Admin Feature Stats
+  const [users, setUsers] = useState(MOCK_USERS);
+  const [viewingUser, setViewingUser] = useState(null); // For admin impersonation
+
   useEffect(() => {
     const savedUser = localStorage.getItem("gymUser");
     if (savedUser) {
@@ -41,14 +49,18 @@ function App() {
 
   const handleLogin = (e) => {
     e.preventDefault();
-    const user = MOCK_USERS.find((u) => u.email === email && u.password === password);
+    const user = users.find((u) => u.email === email && u.password === password);
     if (user) {
+      if (user.status === "pending") {
+        alert("Your account is pending approval by the gym owner.");
+        return;
+      }
       setCurrentUser(user);
       localStorage.setItem("gymUser", JSON.stringify(user));
       setEmail("");
       setPassword("");
       setShowAuthModal(false);
-      setActiveTab("overview");
+      setActiveTab(user.role === "user" ? "overview" : "dashboard");
     } else {
       alert("Invalid credentials. Try: user@gym.lk / 123");
     }
@@ -60,12 +72,13 @@ function App() {
       uid: `user${Date.now()}`,
       ...registerData,
       role: "user",
-      status: "active",
+      status: "pending", // Default to pending
       joinedAt: new Date().toISOString(),
     };
-    MOCK_USERS.push(newUser);
-    setCurrentUser(newUser);
-    localStorage.setItem("gymUser", JSON.stringify(newUser));
+    setUsers([...users, newUser]);
+    // Do NOT auto-login. Wait for approval.
+    // setCurrentUser(newUser); 
+    // localStorage.setItem("gymUser", JSON.stringify(newUser));
     setRegisterData({
       name: "",
       email: "",
@@ -75,8 +88,7 @@ function App() {
       targetMuscle: "General Fitness",
     });
     setShowAuthModal(false);
-    setActiveTab("overview");
-    alert("Registration successful! Welcome to Gym Trainer!");
+    alert("Registration successful! Please wait for admin approval to login.");
   };
 
   const handleLogout = () => {
@@ -110,6 +122,8 @@ function App() {
     }));
   };
 
+
+
   if (!currentUser) {
     return (
       <div className="min-h-screen bg-gradient-to-br from-black via-neutral-900 to-black text-white">
@@ -129,7 +143,7 @@ function App() {
         {/* Auth Modal (Login/Register) */}
         {showAuthModal && (
           <div className="fixed inset-0 bg-black/90 z-50 flex items-center justify-center p-4 overflow-y-auto">
-            <div className="bg-gradient-to-br from-neutral-900 to-black border-2 border-neutral-800 rounded-2xl p-8 max-w-md w-full my-8 shadow-2xl">
+            <div className="bg-gradient-to-br from-neutral-900 to-black border-2 border-neutral-800 rounded-2xl p-8 max-w-md w-full my-8">
               <h2 className="text-3xl font-black mb-6 uppercase italic text-center">
                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-500 to-red-600">
                   {authMode === "login" ? "Welcome Back" : "Join Us"}
@@ -261,94 +275,7 @@ function App() {
           </div>
         )}
 
-        {activeTab === "home" && (
-          <>
-            {/* Hero Section */}
-            <div className="relative min-h-screen flex items-center justify-center px-4">
-              <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1534438327276-14e5300c3a48?q=80&w=2070')] bg-cover bg-center opacity-20"></div>
-              
-              <div className="relative z-10 max-w-6xl mx-auto text-center">
-                <div className="flex items-center justify-center gap-3 mb-6">
-                  <Dumbbell className="w-16 h-16 text-orange-500" />
-                  <h1 className="text-7xl font-black uppercase italic">
-                    <span className="text-white">Gym</span>
-                    <span className="text-orange-500"> Trainer</span>
-                  </h1>
-                </div>
-                
-                <p className="text-2xl text-gray-300 mb-12 max-w-2xl mx-auto">
-                  Transform Your Body, Transform Your Life
-                </p>
-
-                {/* Features */}
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16">
-                  <Card className="text-center">
-                    <Users className="w-12 h-12 text-orange-500 mx-auto mb-4" />
-                    <h3 className="text-xl font-bold mb-2">Expert Coaches</h3>
-                    <p className="text-gray-400">Professional trainers to guide you</p>
-                  </Card>
-                  <Card className="text-center">
-                    <TrendingUp className="w-12 h-12 text-orange-500 mx-auto mb-4" />
-                    <h3 className="text-xl font-bold mb-2">Track Progress</h3>
-                    <p className="text-gray-400">Monitor your fitness journey</p>
-                  </Card>
-                  <Card className="text-center">
-                    <Calendar className="w-12 h-12 text-orange-500 mx-auto mb-4" />
-                    <h3 className="text-xl font-bold mb-2">Custom Plans</h3>
-                    <p className="text-gray-400">Personalized workout schedules</p>
-                  </Card>
-                </div>
-              </div>
-            </div>
-
-            {/* BMI Calculator Section */}
-            <BMICalculator />
-
-            {/* Coaches Section */}
-            <div className="max-w-6xl mx-auto px-4 py-20">
-              <h2 className="text-4xl font-black text-center mb-12 uppercase italic">
-                Meet Our <span className="text-orange-500">Coaches</span>
-              </h2>
-              <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
-                {COACHES.map((coach) => (
-                  <Card key={coach.id} className="text-center">
-                    <img
-                      src={coach.img}
-                      alt={coach.name}
-                      className="w-full h-48 object-cover rounded-xl mb-4"
-                    />
-                    <h3 className="text-xl font-bold">{coach.name}</h3>
-                    <p className="text-orange-500">{coach.role}</p>
-                  </Card>
-                ))}
-              </div>
-            </div>
-
-            {/* Reviews Section */}
-            <div className="max-w-4xl mx-auto px-4 py-20">
-              <h2 className="text-4xl font-black text-center mb-12 uppercase italic">
-                Member <span className="text-orange-500">Reviews</span>
-              </h2>
-              <div className="space-y-4">
-                {INITIAL_REVIEWS.map((review) => (
-                  <Card key={review.id}>
-                    <div className="flex items-start gap-4">
-                      <div className="flex-1">
-                        <h4 className="font-bold text-lg">{review.name}</h4>
-                        <p className="text-gray-400 mt-2">{review.text}</p>
-                        <div className="flex gap-1 mt-2">
-                          {[...Array(review.rating)].map((_, i) => (
-                            <span key={i} className="text-orange-500">★</span>
-                          ))}
-                        </div>
-                      </div>
-                    </div>
-                  </Card>
-                ))}
-              </div>
-            </div>
-          </>
-        )}
+        {activeTab === "home" && <LandingPage />}
 
         {activeTab === "about" && <AboutUs />}
         {activeTab === "contact" && <ContactUs />}
@@ -361,79 +288,198 @@ function App() {
   return (
     <div className="min-h-screen bg-black text-white font-sans">
       {/* Header */}
-      <header className="bg-gradient-to-r from-black via-neutral-950 to-black border-b-2 border-orange-600/30 sticky top-0 z-50 shadow-2xl shadow-orange-900/20">
+      <header className="bg-gradient-to-r from-black via-neutral-950 to-black border-b-2 border-orange-600/30 sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-4 py-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-3">
-              <div className="bg-gradient-to-br from-orange-600 to-red-600 p-3 rounded-lg shadow-lg shadow-orange-600/50 border border-orange-500/30">
+              <div className="bg-gradient-to-br from-orange-600 to-red-600 p-3 rounded-lg border border-orange-500/30">
                 <Dumbbell className="w-7 h-7 text-white" />
               </div>
               <h1 className="text-3xl font-black uppercase italic tracking-tighter">
-                <span className="text-white drop-shadow-lg">GYM</span>
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-500 to-red-600 drop-shadow-lg">TRAINER</span>
+                <span className="text-white">GYM</span>
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-500 to-red-600">TRAINER</span>
               </h1>
             </div>
-            
-            <nav className="hidden md:flex items-center gap-2 bg-black p-1.5 rounded-xl border-2 border-neutral-900 shadow-inner">
-              {["overview", "schedule", "progress", "profile", "about", "contact"].map((tab) => (
-                <button
-                  key={tab}
-                  onClick={() => setActiveTab(tab)}
-                  className={`px-4 py-2.5 rounded-lg font-black uppercase text-xs tracking-wider transition-all duration-200 ${
-                    activeTab === tab 
-                      ? "bg-gradient-to-r from-orange-600 to-red-600 text-white shadow-lg shadow-orange-600/50 border border-orange-500/50" 
-                      : "text-gray-500 hover:text-white hover:bg-neutral-900 border border-transparent"
+
+            {/* Desktop Navigation */}
+            <nav className="hidden md:flex items-center gap-8">
+              <button
+                onClick={() => setActiveTab("home")}
+                className={`font-semibold transition-colors ${activeTab === "home"
+                  ? "text-orange-500"
+                  : "text-gray-400 hover:text-white"
                   }`}
-                >
-                  {tab}
-                </button>
-              ))}
+              >
+                Home
+              </button>
+              <button
+                onClick={() => setActiveTab("about")}
+                className={`font-semibold transition-colors ${activeTab === "about"
+                  ? "text-orange-500"
+                  : "text-gray-400 hover:text-white"
+                  }`}
+              >
+                About Us
+              </button>
+              <button
+                onClick={() => setActiveTab("contact")}
+                className={`font-semibold transition-colors ${activeTab === "contact"
+                  ? "text-orange-500"
+                  : "text-gray-400 hover:text-white"
+                  }`}
+              >
+                Contact Us
+              </button>
             </nav>
 
-            <div className="flex items-center gap-4">
-              <div className="flex items-center gap-2 bg-neutral-950 px-4 py-2 rounded-lg border border-neutral-800">
+            {/* Desktop User Actions */}
+            <div className="hidden md:flex items-center gap-4">
+              <button
+                onClick={() => setActiveTab(currentUser.role === "admin" || currentUser.role === "owner" ? "dashboard" : "overview")}
+                className="flex items-center gap-2 bg-neutral-950 px-4 py-2 rounded-lg border border-neutral-800 hover:bg-neutral-900 transition-colors"
+              >
                 <User className="w-5 h-5 text-orange-500" />
-                <span className="font-bold text-sm">{currentUser.name}</span>
-              </div>
+                <span className="font-bold text-sm uppercase">Dashboard</span>
+              </button>
               <Button onClick={handleLogout} variant="secondary" size="sm">
                 <LogOut className="w-4 h-4 mr-2" />
                 LOGOUT
               </Button>
             </div>
+
+            {/* Mobile Menu Toggle */}
+            <button
+              className="md:hidden text-white p-2"
+              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            >
+              {isMobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+            </button>
           </div>
+
+          {/* Mobile Navigation Menu */}
+          {isMobileMenuOpen && (
+            <div className="md:hidden mt-4 pt-4 border-t border-neutral-800 flex flex-col gap-4 animate-in slide-in-from-top-2">
+              <button
+                onClick={() => { setActiveTab("home"); setIsMobileMenuOpen(false); }}
+                className={`text-left py-2 font-semibold transition-colors ${activeTab === "home" ? "text-orange-500" : "text-gray-400"}`}
+              >
+                Home
+              </button>
+              <button
+                onClick={() => { setActiveTab("about"); setIsMobileMenuOpen(false); }}
+                className={`text-left py-2 font-semibold transition-colors ${activeTab === "about" ? "text-orange-500" : "text-gray-400"}`}
+              >
+                About Us
+              </button>
+              <button
+                onClick={() => { setActiveTab("contact"); setIsMobileMenuOpen(false); }}
+                className={`text-left py-2 font-semibold transition-colors ${activeTab === "contact" ? "text-orange-500" : "text-gray-400"}`}
+              >
+                Contact Us
+              </button>
+
+              <div className="h-px bg-neutral-800 my-2" />
+
+              <button
+                onClick={() => { setActiveTab(currentUser.role === "admin" || currentUser.role === "owner" ? "dashboard" : "overview"); setIsMobileMenuOpen(false); }}
+                className="flex items-center gap-2 text-gray-300 py-2"
+              >
+                <User className="w-5 h-5 text-orange-500" />
+                Dashboard
+              </button>
+              <button
+                onClick={() => { handleLogout(); setIsMobileMenuOpen(false); }}
+                className="flex items-center gap-2 text-red-500 py-2"
+              >
+                <LogOut className="w-5 h-5" />
+                Logout
+              </button>
+            </div>
+          )}
         </div>
       </header>
 
+      {/* Sub Header Navigation */}
+      {!["home", "about", "contact", "dashboard"].includes(activeTab) && (
+        <div className="bg-neutral-950/50 border-b border-white/5 backdrop-blur-sm sticky top-[73px] z-40">
+          <div className="max-w-7xl mx-auto px-4 py-3">
+            <nav className="flex items-center justify-center gap-2 overflow-x-auto no-scrollbar">
+              {["overview", "schedule", "progress", "profile"].map((tab) => (
+                <button
+                  key={tab}
+                  onClick={() => setActiveTab(tab)}
+                  className={`px-5 py-2.5 rounded-xl font-black uppercase text-xs tracking-widest transition-all duration-300 ${activeTab === tab
+                    ? "bg-[#F97316] text-white shadow-lg shadow-orange-900/20"
+                    : "text-gray-400 hover:text-white hover:bg-white/5 border border-transparent"
+                    }`}
+                >
+                  {tab}
+                </button>
+              ))}
+            </nav>
+          </div>
+        </div>
+      )}
+
       {/* Main Content */}
-      <main className="max-w-7xl mx-auto px-4 py-8">
-        {activeTab === "overview" && (
-          <OverviewTab 
-            currentUser={currentUser} 
-            progressData={progressData[currentUser.uid] || []} 
-          />
-        )}
+      {/* Main Content */}
+      {activeTab === "home" ? (
+        <LandingPage />
+      ) : (
+        <main className="max-w-7xl mx-auto px-4 py-8">
+          {activeTab === "overview" && (
+            <OverviewTab
+              currentUser={currentUser}
+              progressData={progressData[currentUser.uid] || []}
+            />
+          )}
 
-        {activeTab === "schedule" && <ScheduleTab />}
+          {activeTab === "dashboard" && (
+            viewingUser ? (
+              <UserDetailView
+                user={viewingUser}
+                onBack={() => setViewingUser(null)}
+                progressData={progressData[viewingUser.uid] || []}
+                onAddProgress={addProgressEntry}
+                onUpdateProfile={(updated) => {
+                  setUsers(users.map(u => u.uid === updated.uid ? updated : u));
+                  setViewingUser(updated);
+                  alert("User Profile Updated");
+                }}
+              />
+            ) : (
+              <AdminDashboard
+                currentUser={currentUser}
+                // onLogout={handleLogout} // Logout is now in Header
+                users={users}
+                setUsers={setUsers}
+                onViewUser={setViewingUser}
+              />
+            )
+          )}
 
-        {activeTab === "progress" && (
-          <ProgressTab
-            currentUser={currentUser}
-            data={progressData[currentUser.uid] || []}
-            addEntry={addProgressEntry}
-          />
-        )}
+          {activeTab === "schedule" && <ScheduleTab />}
 
-        {activeTab === "profile" && (
-          <ProfileTab 
-            currentUser={currentUser} 
-            onUpdateProfile={handleUpdateProfile} 
-          />
-        )}
+          {activeTab === "progress" && (
+            <ProgressTab
+              currentUser={currentUser}
+              data={progressData[currentUser.uid] || []}
+              addEntry={addProgressEntry}
+            />
+          )}
 
-        {activeTab === "about" && <AboutUs />}
+          {activeTab === "profile" && (
+            <ProfileTab
+              currentUser={currentUser}
+              onUpdateProfile={handleUpdateProfile}
+            />
+          )}
 
-        {activeTab === "contact" && <ContactUs />}
-      </main>
+          {activeTab === "about" && <AboutUs />}
+
+          {activeTab === "contact" && <ContactUs />}
+        </main>
+      )}
 
       <Footer />
     </div>

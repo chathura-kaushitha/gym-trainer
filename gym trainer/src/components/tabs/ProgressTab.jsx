@@ -8,7 +8,7 @@ import {
   Tooltip,
   ResponsiveContainer,
 } from "recharts";
-import { Activity, TrendingUp } from "lucide-react";
+import { Activity, TrendingUp, Dumbbell } from "lucide-react";
 
 import Card from "../ui/Card.jsx";
 import Button from "../ui/Button.jsx";
@@ -49,18 +49,25 @@ export default function ProgressTab({ currentUser, data, addEntry }) {
       {/* Metric Selector */}
       <Card>
         <h3 className="text-xl font-bold mb-4 text-orange-500">Select Metric</h3>
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
           {[...BODY_MEASUREMENTS, ...EXERCISE_TYPES].map((m) => (
             <button
               key={m.id}
               onClick={() => setMetric(m.id)}
-              className={`px-4 py-3 rounded-xl font-semibold transition-all ${
-                metric === m.id
-                  ? "bg-[#F97316] text-white shadow-md"
-                  : "bg-[#2A2A2A] text-gray-400 hover:bg-[#333333] hover:text-white"
-              }`}
+              className={`flex flex-col items-center justify-center p-4 rounded-xl border transition-all duration-300 ${metric === m.id
+                  ? "bg-gradient-to-br from-orange-600 to-red-600 border-transparent text-white shadow-lg shadow-orange-900/30 transform scale-105"
+                  : "bg-neutral-900/50 border-white/5 text-gray-400 hover:border-orange-500/50 hover:text-white hover:bg-neutral-800"
+                }`}
             >
-              {m.label}
+              <div className={`p-2 rounded-lg mb-2 ${metric === m.id ? "bg-white/20" : "bg-neutral-800"
+                }`}>
+                {EXERCISE_TYPES.some(e => e.id === m.id) ? (
+                  <Dumbbell className={`w-5 h-5 ${metric === m.id ? "text-white" : "text-orange-500"}`} />
+                ) : (
+                  <Activity className={`w-5 h-5 ${metric === m.id ? "text-white" : "text-orange-500"}`} />
+                )}
+              </div>
+              <span className="font-bold text-sm text-center">{m.label}</span>
             </button>
           ))}
         </div>

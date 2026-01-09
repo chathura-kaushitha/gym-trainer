@@ -33,6 +33,17 @@ export const MOCK_USERS = [
     phone: "0719876543",
     address: "Kandy Road, Kiribathgoda",
     targetMuscle: "Hypertrophy",
+  },
+  {
+    uid: "pending123",
+    email: "pending@gym.lk",
+    password: "123",
+    name: "Pending User",
+    role: "user",
+    status: "pending",
+    phone: "0700000000",
+    address: "Waiting Room",
+    targetMuscle: "General Fitness",
     joinedAt: new Date().toISOString(),
   },
 ];

@@ -23,7 +23,7 @@ export default function Input({
         onChange={onChange}
         placeholder={placeholder}
         required={required}
-        className="w-full bg-[#0F0F0F] border-2 border-[#2A2A2A] rounded-xl py-3 px-4 text-white placeholder-gray-600 focus:outline-none focus:border-[#F97316] transition-all shadow-inner"
+        className="w-full bg-[#0F0F0F] border-2 border-[#2A2A2A] rounded-xl py-3 px-4 text-white placeholder-gray-600 focus:outline-none focus:border-[#F97316] transition-all"
       />
     </div>
   );

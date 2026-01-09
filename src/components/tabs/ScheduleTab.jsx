@@ -3,12 +3,8 @@ import { Calendar, Plus, Edit2, Trash2, Save, X, Utensils } from "lucide-react";
 import Card from "../ui/Card.jsx";
 import Button from "../ui/Button.jsx";
 import Input from "../ui/Input.jsx";
-import { INITIAL_SCHEDULE, INITIAL_MEAL_PLAN } from "../../data/constants.js";
 
-export default function ScheduleTab() {
-  const [schedule, setSchedule] = useState(INITIAL_SCHEDULE);
-  const [mealPlan, setMealPlan] = useState(INITIAL_MEAL_PLAN);
-
+export default function ScheduleTab({ schedule, onUpdateSchedule, mealPlan, onUpdateMealPlan }) {
   // Edit States
   const [editingScheduleIdx, setEditingScheduleIdx] = useState(null);
   const [editingMealIdx, setEditingMealIdx] = useState(null);
@@ -30,18 +26,18 @@ export default function ScheduleTab() {
   const saveSchedule = (idx) => {
     const updated = [...schedule];
     updated[idx] = scheduleForm;
-    setSchedule(updated);
+    onUpdateSchedule(updated);
     setEditingScheduleIdx(null);
   };
 
   const deleteSchedule = (idx) => {
     if (window.confirm("Delete this workout?")) {
-      setSchedule(schedule.filter((_, i) => i !== idx));
+      onUpdateSchedule(schedule.filter((_, i) => i !== idx));
     }
   };
 
   const addSchedule = () => {
-    setSchedule([...schedule, newSchedule]);
+    onUpdateSchedule([...schedule, newSchedule]);
     setIsAddingSchedule(false);
     setNewSchedule({ day: "", focus: "", time: "08:00 AM" });
   };
@@ -55,18 +51,18 @@ export default function ScheduleTab() {
   const saveMeal = (idx) => {
     const updated = [...mealPlan];
     updated[idx] = mealForm;
-    setMealPlan(updated);
+    onUpdateMealPlan(updated);
     setEditingMealIdx(null);
   };
 
   const deleteMeal = (idx) => {
     if (window.confirm("Delete this meal?")) {
-      setMealPlan(mealPlan.filter((_, i) => i !== idx));
+      onUpdateMealPlan(mealPlan.filter((_, i) => i !== idx));
     }
   };
 
   const addMeal = () => {
-    setMealPlan([...mealPlan, newMeal]);
+    onUpdateMealPlan([...mealPlan, newMeal]);
     setIsAddingMeal(false);
     setNewMeal({ meal: "", items: "" });
   };

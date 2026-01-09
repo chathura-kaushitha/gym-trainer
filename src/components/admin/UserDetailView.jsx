@@ -6,7 +6,17 @@ import ScheduleTab from "../tabs/ScheduleTab.jsx";
 import ProgressTab from "../tabs/ProgressTab.jsx";
 import ProfileTab from "../tabs/ProfileTab.jsx";
 
-export default function UserDetailView({ user, onBack, progressData, onAddProgress, onUpdateProfile }) {
+export default function UserDetailView({
+    user,
+    onBack,
+    progressData,
+    onAddProgress,
+    onUpdateProfile,
+    schedule,
+    onUpdateSchedule,
+    mealPlan,
+    onUpdateMealPlan
+}) {
     const [activeTab, setActiveTab] = useState("overview");
 
     return (
@@ -49,7 +59,14 @@ export default function UserDetailView({ user, onBack, progressData, onAddProgre
                     />
                 )}
 
-                {activeTab === "schedule" && <ScheduleTab />}
+                {activeTab === "schedule" && (
+                    <ScheduleTab
+                        schedule={schedule}
+                        onUpdateSchedule={onUpdateSchedule}
+                        mealPlan={mealPlan}
+                        onUpdateMealPlan={onUpdateMealPlan}
+                    />
+                )}
 
                 {activeTab === "progress" && (
                     <ProgressTab

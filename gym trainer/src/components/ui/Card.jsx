@@ -3,15 +3,15 @@ import React from "react";
 export default function Card({ children, title, icon: Icon, action, className = "" }) {
   return (
     <div
-      className={`relative bg-neutral-900/80 backdrop-blur-xl border border-neutral-800 rounded-2xl p-6 shadow-2xl group overflow-hidden ${className}`}
+      className={`relative bg-gradient-to-br from-neutral-950 to-black border-2 border-neutral-900 rounded-2xl p-6 shadow-2xl shadow-black/50 group overflow-hidden hover:border-orange-900/30 transition-all duration-300 ${className}`}
     >
-      <div className="absolute -top-20 -right-20 w-40 h-40 bg-orange-500/10 rounded-full blur-3xl group-hover:bg-orange-500/20 transition-all duration-500"></div>
-
+      <div className="absolute inset-0 bg-gradient-to-br from-orange-600/5 to-red-600/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+      
       {(title || Icon) && (
-        <div className="relative z-10 flex items-center justify-between mb-6 border-b border-neutral-800 pb-4">
+        <div className="relative z-10 flex items-center justify-between mb-6 border-b-2 border-neutral-900 pb-4">
           <div className="flex items-center gap-3">
             {Icon && (
-              <div className="p-2 bg-gradient-to-br from-orange-600 to-red-600 rounded-lg">
+              <div className="p-2 bg-gradient-to-br from-orange-600 to-red-600 rounded-lg shadow-lg shadow-orange-600/50">
                 <Icon className="text-white w-5 h-5" />
               </div>
             )}

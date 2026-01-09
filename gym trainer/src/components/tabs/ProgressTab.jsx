@@ -56,8 +56,8 @@ export default function ProgressTab({ currentUser, data, addEntry }) {
               onClick={() => setMetric(m.id)}
               className={`px-4 py-3 rounded-xl font-semibold transition-all ${
                 metric === m.id
-                  ? "bg-orange-500 text-white"
-                  : "bg-neutral-800 text-gray-400 hover:bg-neutral-700"
+                  ? "bg-[#F97316] text-white shadow-md"
+                  : "bg-[#2A2A2A] text-gray-400 hover:bg-[#333333] hover:text-white"
               }`}
             >
               {m.label}
@@ -142,7 +142,7 @@ export default function ProgressTab({ currentUser, data, addEntry }) {
             {[...chartData].reverse().slice(0, 5).map((entry, idx) => (
               <div
                 key={idx}
-                className="flex items-center justify-between p-3 bg-neutral-800/50 rounded-lg"
+                className="flex items-center justify-between p-3 bg-[#2A2A2A] rounded-lg border border-[#333333]"
               >
                 <span className="text-gray-400">{entry.date}</span>
                 <span className="font-bold text-white">

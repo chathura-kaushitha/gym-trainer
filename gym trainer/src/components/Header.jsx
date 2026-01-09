@@ -12,7 +12,7 @@ export default function Header({ onLoginClick, onRegisterClick, activeTab, setAc
   ];
 
   return (
-    <header className="bg-neutral-900/95 backdrop-blur-lg border-b border-neutral-800 sticky top-0 z-50 shadow-2xl">
+    <header className="bg-neutral-950 border-b border-neutral-800 sticky top-0 z-50 shadow-2xl">
       <div className="max-w-7xl mx-auto px-4 py-4">
         <div className="flex items-center justify-between">
           {/* Logo */}
@@ -41,13 +41,10 @@ export default function Header({ onLoginClick, onRegisterClick, activeTab, setAc
             ))}
           </nav>
 
-          {/* Desktop Auth Buttons */}
+          {/* Desktop Auth Button */}
           <div className="hidden md:flex items-center gap-3">
-            <Button onClick={onLoginClick} variant="outline" className="px-6 py-2">
-              Login
-            </Button>
-            <Button onClick={onRegisterClick} variant="primary" className="px-6 py-2">
-              Register
+            <Button onClick={onLoginClick} variant="primary" className="px-8 py-2">
+              JOIN NOW
             </Button>
           </div>
 
@@ -82,11 +79,8 @@ export default function Header({ onLoginClick, onRegisterClick, activeTab, setAc
               ))}
             </nav>
             <div className="flex flex-col gap-2">
-              <Button onClick={onLoginClick} variant="outline" className="w-full">
-                Login
-              </Button>
-              <Button onClick={onRegisterClick} variant="primary" className="w-full">
-                Register
+              <Button onClick={onLoginClick} variant="primary" className="w-full">
+                JOIN NOW
               </Button>
             </div>
           </div>

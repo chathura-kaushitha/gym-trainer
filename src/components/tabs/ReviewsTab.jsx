@@ -105,45 +105,45 @@ export default function ReviewsTab() {
                 </div>
 
                 {/* Review List */}
-                <div className="lg:col-span-2 space-y-6">
-                    <div className="grid md:grid-cols-2 gap-6">
+                <div className="lg:col-span-2">
+                    <div className="grid md:grid-cols-2 gap-4">
                         {reviews.map((review) => (
                             <Card key={review.id} className="group relative border-neutral-800 hover:border-red-500/50 transition-all duration-500 bg-neutral-900/30 overflow-hidden">
-                                <Quote className="absolute -top-4 -right-4 w-24 h-24 text-red-500/5 group-hover:text-red-500/10 transition-colors pointer-events-none rotate-12" />
-                                <div className="p-6 space-y-4">
+                                <Quote className="absolute -top-2 -right-2 w-16 h-16 text-red-500/5 group-hover:text-red-500/10 transition-colors pointer-events-none rotate-12" />
+                                <div className="p-4 space-y-3">
                                     <div className="flex justify-between items-start">
-                                        <div className="flex items-center gap-3">
-                                            <div className="w-12 h-12 bg-gradient-to-br from-red-500 to-orange-600 rounded-2xl flex items-center justify-center font-black text-white shadow-lg rotate-3 group-hover:rotate-0 transition-transform">
+                                        <div className="flex items-center gap-2">
+                                            <div className="w-9 h-9 bg-gradient-to-br from-red-500 to-orange-600 rounded-xl flex items-center justify-center font-black text-xs text-white shadow-lg rotate-3 group-hover:rotate-0 transition-transform">
                                                 {(review.name || "A").charAt(0)}
                                             </div>
                                             <div>
-                                                <h4 className="font-bold text-lg group-hover:text-orange-500 transition-colors">{review.name || "Anonymous"}</h4>
-                                                <div className="flex items-center gap-2">
-                                                    <span className="text-[10px] bg-red-500/10 text-red-500 px-2 py-0.5 rounded-full font-bold uppercase tracking-tighter">
+                                                <h4 className="font-bold text-sm group-hover:text-orange-500 transition-colors">{review.name || "Anonymous"}</h4>
+                                                <div className="flex items-center gap-1.5">
+                                                    <span className="text-[9px] bg-red-500/10 text-red-500 px-1.5 py-0.5 rounded-full font-bold uppercase tracking-tighter">
                                                         {review.category || "General"}
                                                     </span>
-                                                    <span className="text-[10px] text-neutral-500">{review.date || "Recently"}</span>
+                                                    <span className="text-[9px] text-neutral-500">{review.date || "Recently"}</span>
                                                 </div>
                                             </div>
                                         </div>
-                                        <div className="flex gap-0.5 bg-black/40 p-1.5 rounded-lg border border-neutral-800">
+                                        <div className="flex gap-0.5 bg-black/40 p-1 rounded-md border border-neutral-800">
                                             {[...Array(5)].map((_, i) => (
                                                 <Star
                                                     key={i}
-                                                    className={`w-3.5 h-3.5 ${i < review.rating ? "fill-orange-500 text-orange-500" : "text-neutral-800"
+                                                    className={`w-3 h-3 ${i < review.rating ? "fill-orange-500 text-orange-500" : "text-neutral-800"
                                                         }`}
                                                 />
                                             ))}
                                         </div>
                                     </div>
                                     
-                                    <p className="text-neutral-300 leading-relaxed italic relative z-10">
+                                    <p className="text-neutral-300 text-sm leading-relaxed italic relative z-10">
                                         "{review.text}"
                                     </p>
 
-                                    <div className="pt-4 border-t border-neutral-800 flex items-center justify-between">
-                                        <button className="flex items-center gap-2 text-xs font-bold text-neutral-500 hover:text-red-500 transition-colors">
-                                            <ThumbsUp className="w-4 h-4" />
+                                    <div className="pt-2 border-t border-neutral-800 flex items-center justify-between">
+                                        <button className="flex items-center gap-1.5 text-[10px] font-bold text-neutral-500 hover:text-red-500 transition-colors">
+                                            <ThumbsUp className="w-3 h-3" />
                                             Helpful
                                         </button>
                                     </div>

@@ -35,11 +35,11 @@ export default function ReviewsTab() {
         <div className="max-w-6xl mx-auto space-y-12 pb-12">
             {/* Header Section */}
             <div className="text-center space-y-4">
-                <div className="inline-flex items-center justify-center p-3 bg-gradient-to-br from-red-500/20 to-orange-500/20 rounded-2xl border border-red-500/30 mb-2">
-                    <MessageSquare className="w-8 h-8 text-orange-500" />
+                <div className="inline-flex items-center justify-center p-3 bg-gradient-to-br from-red-500/20 to-red-600/20 rounded-2xl border border-red-500/30 mb-2">
+                    <MessageSquare className="w-8 h-8 text-red-600" />
                 </div>
                 <h2 className="text-4xl md:text-5xl font-black uppercase italic tracking-tighter">
-                    Client <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-orange-500">Success Stories</span>
+                    Client <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-red-600">Success Stories</span>
                 </h2>
                 <p className="text-gray-400 max-w-2xl mx-auto text-lg">
                     Real results from real people. Join our community and start your journey today.
@@ -72,7 +72,7 @@ export default function ReviewsTab() {
                                                 >
                                                     <Star
                                                         className={`w-7 h-7 ${star <= (hoveredStar || newReview.rating)
-                                                            ? "fill-orange-500 text-orange-500 drop-shadow-[0_0_8px_rgba(249,115,22,0.5)]"
+                                                            ? "fill-red-600 text-red-600 drop-shadow-[0_0_8px_rgba(249,115,22,0.5)]"
                                                             : "text-neutral-700"
                                                             }`}
                                                     />
@@ -93,7 +93,7 @@ export default function ReviewsTab() {
                                     <Button 
                                         type="submit" 
                                         disabled={!newReview.text.trim()}
-                                        className="w-full bg-gradient-to-r from-red-600 to-orange-500 hover:from-red-500 hover:to-orange-400 py-6 text-lg shadow-xl shadow-red-900/20 transition-all active:scale-95 group"
+                                        className="w-full bg-gradient-to-r from-red-600 to-red-600 hover:from-red-500 hover:to-red-500 py-6 text-lg shadow-xl shadow-red-900/20 transition-all active:scale-95 group"
                                     >
                                         <span>Post Review</span>
                                         <Send className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
@@ -117,7 +117,7 @@ export default function ReviewsTab() {
                                                 {(review.name || "A").charAt(0)}
                                             </div>
                                             <div>
-                                                <h4 className="font-bold text-sm group-hover:text-orange-500 transition-colors">{review.name || "Anonymous"}</h4>
+                                                <h4 className="font-bold text-sm group-hover:text-red-600 transition-colors">{review.name || "Anonymous"}</h4>
                                                 <div className="flex items-center gap-1.5">
                                                     <span className="text-[9px] bg-red-500/10 text-red-500 px-1.5 py-0.5 rounded-full font-bold uppercase tracking-tighter">
                                                         {review.category || "General"}
@@ -130,7 +130,7 @@ export default function ReviewsTab() {
                                             {[...Array(5)].map((_, i) => (
                                                 <Star
                                                     key={i}
-                                                    className={`w-3 h-3 ${i < review.rating ? "fill-orange-500 text-orange-500" : "text-neutral-800"
+                                                    className={`w-3 h-3 ${i < review.rating ? "fill-red-600 text-red-600" : "text-neutral-800"
                                                         }`}
                                                 />
                                             ))}

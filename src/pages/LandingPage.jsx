@@ -63,7 +63,7 @@ export default function LandingPage() {
                         {/* Cinematic Animated Text - Smaller Size, No Shadows */}
                         <h1 className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-black uppercase italic mb-3 sm:mb-4 animate-cinematic-text">
                             <span className="text-white inline-block mx-1">Gym</span>
-                            <span className="text-orange-500 inline-block mx-1">Trainer</span>
+                            <span className="text-red-600 inline-block mx-1">Trainer</span>
                         </h1>
 
                         {/* Tagline - Responsive */}
@@ -75,17 +75,17 @@ export default function LandingPage() {
                     {/* Feature Cards - Responsive Grid - Smaller Size */}
                     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 sm:gap-4 mt-8 sm:mt-12 px-4 max-w-3xl mx-auto animate-cards-appear">
                         <Card className="text-center py-4 px-3">
-                            <Users className="w-8 h-8 text-orange-500 mx-auto mb-3" />
+                            <Users className="w-8 h-8 text-red-600 mx-auto mb-3" />
                             <h3 className="text-base font-bold mb-1">Expert Coaches</h3>
                             <p className="text-gray-400 text-xs">Professional trainers to guide you</p>
                         </Card>
                         <Card className="text-center py-4 px-3">
-                            <TrendingUp className="w-8 h-8 text-orange-500 mx-auto mb-3" />
+                            <TrendingUp className="w-8 h-8 text-red-600 mx-auto mb-3" />
                             <h3 className="text-base font-bold mb-1">Track Progress</h3>
                             <p className="text-gray-400 text-xs">Monitor your fitness journey</p>
                         </Card>
                         <Card className="text-center py-4 px-3">
-                            <Calendar className="w-8 h-8 text-orange-500 mx-auto mb-3" />
+                            <Calendar className="w-8 h-8 text-red-600 mx-auto mb-3" />
                             <h3 className="text-base font-bold mb-1">Custom Plans</h3>
                             <p className="text-gray-400 text-xs">Personalized workout schedules</p>
                         </Card>
@@ -98,7 +98,7 @@ export default function LandingPage() {
             {/* Coaches Section */}
             <div className="max-w-6xl mx-auto px-4 py-20">
                 <h2 className="text-4xl font-black text-center mb-12 uppercase italic">
-                    Meet Our <span className="text-orange-500">Coaches</span>
+                    Meet Our <span className="text-red-600">Coaches</span>
                 </h2>
                 <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
                     {COACHES.map((coach) => (
@@ -109,7 +109,7 @@ export default function LandingPage() {
                                 className="w-full h-48 object-cover rounded-xl mb-4"
                             />
                             <h3 className="text-xl font-bold">{coach.name}</h3>
-                            <p className="text-orange-500">{coach.role}</p>
+                            <p className="text-red-600">{coach.role}</p>
                         </Card>
                     ))}
                 </div>
@@ -121,7 +121,7 @@ export default function LandingPage() {
             {/* Reviews Section - Auto Slider */}
             <div className="max-w-4xl mx-auto px-4 py-20">
                 <h2 className="text-4xl font-black text-center mb-12 uppercase italic">
-                    Member <span className="text-orange-500">Reviews</span>
+                    Member <span className="text-red-600">Reviews</span>
                 </h2>
 
                 <div className="relative">
@@ -134,15 +134,15 @@ export default function LandingPage() {
                             {INITIAL_REVIEWS.map((review) => (
                                 <div key={review.id} className="w-full flex-shrink-0 px-4">
                                     <div className="bg-neutral-900/50 border border-neutral-800 p-8 rounded-2xl relative">
-                                        <Quote className="absolute top-4 right-4 w-8 h-8 text-orange-500/20" />
+                                        <Quote className="absolute top-4 right-4 w-8 h-8 text-red-600/20" />
                                         <div className="flex flex-col items-center text-center">
-                                            <div className="w-16 h-16 bg-gradient-to-br from-orange-500 to-red-600 rounded-full flex items-center justify-center mb-4 text-2xl font-bold">
+                                            <div className="w-16 h-16 bg-gradient-to-br from-red-600 to-red-600 rounded-full flex items-center justify-center mb-4 text-2xl font-bold">
                                                 {review.name.charAt(0)}
                                             </div>
                                             <h4 className="text-xl font-bold mb-2">{review.name}</h4>
                                             <div className="flex gap-1 mb-4">
                                                 {[...Array(review.rating)].map((_, i) => (
-                                                    <Star key={i} className="w-4 h-4 fill-orange-500 text-orange-500" />
+                                                    <Star key={i} className="w-4 h-4 fill-red-600 text-red-600" />
                                                 ))}
                                             </div>
                                             <p className="text-gray-300 italic text-lg leading-relaxed">"{review.text}"</p>
@@ -156,14 +156,14 @@ export default function LandingPage() {
                     {/* Controls */}
                     <button
                         onClick={prevReview}
-                        className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-2 md:-translate-x-12 p-2 bg-neutral-900 border border-neutral-800 rounded-full text-gray-400 hover:text-white hover:border-orange-500 transition-all z-10"
+                        className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-2 md:-translate-x-12 p-2 bg-neutral-900 border border-neutral-800 rounded-full text-gray-400 hover:text-white hover:border-red-600 transition-all z-10"
                     >
                         <ChevronLeft className="w-6 h-6" />
                     </button>
 
                     <button
                         onClick={nextReview}
-                        className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-2 md:translate-x-12 p-2 bg-neutral-900 border border-neutral-800 rounded-full text-gray-400 hover:text-white hover:border-orange-500 transition-all z-10"
+                        className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-2 md:translate-x-12 p-2 bg-neutral-900 border border-neutral-800 rounded-full text-gray-400 hover:text-white hover:border-red-600 transition-all z-10"
                     >
                         <ChevronRight className="w-6 h-6" />
                     </button>
@@ -175,7 +175,7 @@ export default function LandingPage() {
                                 key={idx}
                                 onClick={() => setCurrentReviewIndex(idx)}
                                 className={`w-2 h-2 rounded-full transition-all duration-300 ${currentReviewIndex === idx
-                                    ? "w-8 bg-orange-500"
+                                    ? "w-8 bg-red-600"
                                     : "bg-neutral-700 hover:bg-neutral-600"
                                     }`}
                             />

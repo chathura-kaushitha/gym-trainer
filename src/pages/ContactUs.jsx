@@ -49,10 +49,10 @@ export default function ContactUs() {
     <div className="min-h-screen">
       {/* Hero Section */}
       <div className="relative py-20 px-4">
-        <div className="absolute inset-0 bg-gradient-to-br from-orange-500/10 to-red-500/10 blur-3xl"></div>
+        <div className="absolute inset-0 bg-gradient-to-br from-red-600/10 to-red-500/10 blur-3xl"></div>
         <div className="relative z-10 max-w-4xl mx-auto text-center">
           <h1 className="text-5xl md:text-6xl font-black uppercase italic mb-6">
-            Get In <span className="text-orange-500">Touch</span>
+            Get In <span className="text-red-600">Touch</span>
           </h1>
           <p className="text-xl text-gray-300">
             Have questions? We'd love to hear from you. Send us a message and we'll respond as soon as possible.
@@ -65,7 +65,7 @@ export default function ContactUs() {
           {/* Contact Form */}
           <Card>
             <h2 className="text-2xl font-black uppercase italic mb-6">
-              Send Us a <span className="text-orange-500">Message</span>
+              Send Us a <span className="text-red-600">Message</span>
             </h2>
             <form onSubmit={handleSubmit} className="space-y-4">
               <div>
@@ -109,7 +109,7 @@ export default function ContactUs() {
                   value={formData.message}
                   onChange={handleChange}
                   required
-                  className="w-full bg-neutral-800 border border-neutral-700 rounded-xl px-4 py-3 text-white focus:border-orange-500 outline-none resize-none"
+                  className="w-full bg-neutral-800 border border-neutral-700 rounded-xl px-4 py-3 text-white focus:border-red-600 outline-none resize-none"
                 ></textarea>
               </div>
               <Button type="submit" className="w-full">
@@ -123,7 +123,7 @@ export default function ContactUs() {
           <div className="space-y-6">
             <Card>
               <h2 className="text-2xl font-black uppercase italic mb-6">
-                Contact <span className="text-orange-500">Information</span>
+                Contact <span className="text-red-600">Information</span>
               </h2>
               <div className="space-y-6">
                 {contactInfo.map((info, idx) => (
@@ -149,7 +149,7 @@ export default function ContactUs() {
               <h3 className="text-xl font-bold text-white mb-4">Find Us</h3>
               <div className="w-full h-64 bg-neutral-800 rounded-xl flex items-center justify-center border border-neutral-700">
                 <div className="text-center">
-                  <MapPin className="w-12 h-12 text-orange-500 mx-auto mb-2" />
+                  <MapPin className="w-12 h-12 text-red-600 mx-auto mb-2" />
                   <p className="text-gray-400">123 Fitness Street</p>
                   <p className="text-gray-400">Colombo 07, Sri Lanka</p>
                 </div>
@@ -163,7 +163,7 @@ export default function ContactUs() {
       <div className="max-w-4xl mx-auto px-4 py-12">
         <Card>
           <h2 className="text-3xl font-black uppercase italic text-center mb-8">
-            Frequently Asked <span className="text-orange-500">Questions</span>
+            Frequently Asked <span className="text-red-600">Questions</span>
           </h2>
           <div className="space-y-4">
             <div className="border-b border-neutral-800 pb-4">

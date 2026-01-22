@@ -77,7 +77,7 @@ export default function ScheduleTab() {
         <div>
           <h1 className="text-4xl font-black uppercase italic">
             <span className="text-white">Plan Your</span>
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-500 to-red-600"> Week</span>
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-600 to-red-600"> Week</span>
           </h1>
           <p className="text-gray-400 mt-2">Manage your workout routine and diet in one place</p>
         </div>
@@ -89,7 +89,7 @@ export default function ScheduleTab() {
         <div className="space-y-6">
           <div className="flex items-center justify-between border-b border-white/10 pb-4">
             <div className="flex items-center gap-3">
-              <Calendar className="w-6 h-6 text-orange-500" />
+              <Calendar className="w-6 h-6 text-red-600" />
               <h2 className="text-2xl font-black uppercase italic">Workout Schedule</h2>
             </div>
             <Button onClick={() => setIsAddingSchedule(true)} size="sm">
@@ -99,8 +99,8 @@ export default function ScheduleTab() {
           </div>
 
           {isAddingSchedule && (
-            <Card className="mb-6 border-orange-500/50">
-              <h3 className="text-lg font-bold mb-4 text-orange-500">Add New Workout</h3>
+            <Card className="mb-6 border-red-600/50">
+              <h3 className="text-lg font-bold mb-4 text-red-600">Add New Workout</h3>
               <div className="grid grid-cols-1 gap-3">
                 <Input
                   placeholder="Day (e.g., Monday)"
@@ -155,12 +155,12 @@ export default function ScheduleTab() {
                     <div className="flex-1">
                       <div className="flex items-center gap-2 mb-1">
                         <h3 className="text-xl font-bold uppercase">{item.day}</h3>
-                        <span className="text-xs bg-neutral-800 text-orange-500 px-2 py-0.5 rounded font-bold">{item.time}</span>
+                        <span className="text-xs bg-neutral-800 text-red-600 px-2 py-0.5 rounded font-bold">{item.time}</span>
                       </div>
                       <p className="text-gray-400">{item.focus}</p>
                     </div>
                     <div className="flex flex-col gap-1 opacity-100 lg:opacity-0 group-hover:opacity-100 transition-opacity">
-                      <button onClick={() => handleEditSchedule(idx, item)} className="text-gray-500 hover:text-orange-500"><Edit2 className="w-4 h-4" /></button>
+                      <button onClick={() => handleEditSchedule(idx, item)} className="text-gray-500 hover:text-red-600"><Edit2 className="w-4 h-4" /></button>
                       <button onClick={() => deleteSchedule(idx)} className="text-gray-500 hover:text-red-500"><Trash2 className="w-4 h-4" /></button>
                     </div>
                   </div>
@@ -174,7 +174,7 @@ export default function ScheduleTab() {
         <div className="space-y-6">
           <div className="flex items-center justify-between border-b border-white/10 pb-4">
             <div className="flex items-center gap-3">
-              <Utensils className="w-6 h-6 text-orange-500" />
+              <Utensils className="w-6 h-6 text-red-600" />
               <h2 className="text-2xl font-black uppercase italic">Dietary Plan</h2>
             </div>
             <Button onClick={() => setIsAddingMeal(true)} size="sm">
@@ -184,8 +184,8 @@ export default function ScheduleTab() {
           </div>
 
           {isAddingMeal && (
-            <Card className="mb-6 border-orange-500/50">
-              <h3 className="text-lg font-bold mb-4 text-orange-500">Add New Meal</h3>
+            <Card className="mb-6 border-red-600/50">
+              <h3 className="text-lg font-bold mb-4 text-red-600">Add New Meal</h3>
               <div className="grid grid-cols-1 gap-3">
                 <Input
                   placeholder="Meal Name (e.g., Breakfast)"
@@ -228,11 +228,11 @@ export default function ScheduleTab() {
                 ) : (
                   <div className="flex items-start justify-between gap-4">
                     <div className="flex-1">
-                      <h3 className="text-xl font-bold uppercase text-orange-500 mb-1">{item.meal}</h3>
+                      <h3 className="text-xl font-bold uppercase text-red-600 mb-1">{item.meal}</h3>
                       <p className="text-gray-300 text-sm leading-relaxed">{item.items}</p>
                     </div>
                     <div className="flex flex-col gap-1 opacity-100 lg:opacity-0 group-hover:opacity-100 transition-opacity">
-                      <button onClick={() => handleEditMeal(idx, item)} className="text-gray-500 hover:text-orange-500"><Edit2 className="w-4 h-4" /></button>
+                      <button onClick={() => handleEditMeal(idx, item)} className="text-gray-500 hover:text-red-600"><Edit2 className="w-4 h-4" /></button>
                       <button onClick={() => deleteMeal(idx)} className="text-gray-500 hover:text-red-500"><Trash2 className="w-4 h-4" /></button>
                     </div>
                   </div>

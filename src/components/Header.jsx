@@ -17,10 +17,10 @@ export default function Header({ onLoginClick, onRegisterClick, activeTab, setAc
         <div className="flex items-center justify-between">
           {/* Logo */}
           <div className="flex items-center gap-3 cursor-pointer" onClick={() => setActiveTab("home")}>
-            <Dumbbell className="w-8 h-8 text-orange-500" />
+            <Dumbbell className="w-8 h-8 text-red-600" />
             <h1 className="text-2xl font-black uppercase italic">
               <span className="text-white">Gym</span>
-              <span className="text-orange-500"> Trainer</span>
+              <span className="text-red-600"> Trainer</span>
             </h1>
           </div>
 
@@ -31,7 +31,7 @@ export default function Header({ onLoginClick, onRegisterClick, activeTab, setAc
                 key={link.id}
                 onClick={() => setActiveTab(link.id)}
                 className={`font-semibold transition-colors ${activeTab === link.id
-                  ? "text-orange-500"
+                  ? "text-red-600"
                   : "text-gray-400 hover:text-white"
                   }`}
               >
@@ -72,7 +72,7 @@ export default function Header({ onLoginClick, onRegisterClick, activeTab, setAc
                     setMobileMenuOpen(false);
                   }}
                   className={`font-semibold text-left transition-colors ${activeTab === link.id
-                    ? "text-orange-500"
+                    ? "text-red-600"
                     : "text-gray-400 hover:text-white"
                     }`}
                 >

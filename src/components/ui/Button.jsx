@@ -20,13 +20,13 @@ export default function Button({
 
   const variants = {
     primary:
-      "bg-gradient-to-r from-red-600 to-orange-500 hover:from-red-500 hover:to-orange-400 text-white border-red-800 active:translate-y-1 active:border-b-0",
+      "bg-gradient-to-r from-red-600 to-red-600 hover:from-red-500 hover:to-red-500 text-white border-red-800 active:translate-y-1 active:border-b-0",
     secondary:
       "bg-gradient-to-r from-red-600 to-red-500 hover:from-red-500 hover:to-red-400 text-white border-red-800 active:translate-y-1 active:border-b-0",
     outline:
-      "bg-neutral-950 text-orange-500 border-black hover:bg-neutral-900 hover:text-orange-400 active:translate-y-1 active:border-b-0",
+      "bg-neutral-950 text-red-600 border-black hover:bg-neutral-900 hover:text-red-500 active:translate-y-1 active:border-b-0",
     ghost: "bg-transparent text-gray-400 hover:text-white border-transparent",
-    flat: "bg-gradient-to-r from-red-600 to-orange-500 hover:from-red-500 hover:to-orange-400 text-white border-b-0 active:scale-95 active:translate-y-0",
+    flat: "bg-gradient-to-r from-red-600 to-red-600 hover:from-red-500 hover:to-red-500 text-white border-b-0 active:scale-95 active:translate-y-0",
   };
 
   return (

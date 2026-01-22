@@ -24,16 +24,16 @@ export default function ProfileTab({ currentUser, onUpdateProfile }) {
   return (
     <div className="space-y-8">
       <div className="flex items-center gap-3 mb-6">
-        <User className="w-8 h-8 text-orange-500" />
+        <User className="w-8 h-8 text-red-600" />
         <h2 className="text-3xl font-black uppercase italic">
-          My <span className="text-orange-500">Profile</span>
+          My <span className="text-red-600">Profile</span>
         </h2>
       </div>
 
       <div className="max-w-4xl mx-auto">
         <Card>
           <div className="flex items-center justify-between mb-6">
-            <h3 className="text-xl font-bold text-orange-500">Personal Information</h3>
+            <h3 className="text-xl font-bold text-red-600">Personal Information</h3>
             <Button
               variant={isEditing ? "outline" : "primary"}
               onClick={() => isEditing ? setIsEditing(false) : setIsEditing(true)}
@@ -94,7 +94,7 @@ export default function ProfileTab({ currentUser, onUpdateProfile }) {
                   value={formData.targetMuscle}
                   onChange={(e) => setFormData({ ...formData, targetMuscle: e.target.value })}
                   disabled={!isEditing}
-                  className={`w-full bg-[#0F0F0F] border border-[#2A2A2A] rounded-xl px-4 py-3 text-white focus:border-[#F97316] outline-none ${!isEditing && "opacity-50 cursor-not-allowed"}`}
+                  className={`w-full bg-[#0F0F0F] border border-[#2A2A2A] rounded-xl px-4 py-3 text-white focus:border-[rgb(220 38 38)] outline-none ${!isEditing && "opacity-50 cursor-not-allowed"}`}
                 >
                   <option value="General Fitness">General Fitness</option>
                   <option value="Weight Loss">Weight Loss</option>

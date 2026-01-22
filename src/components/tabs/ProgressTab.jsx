@@ -40,31 +40,31 @@ export default function ProgressTab({ currentUser, data, addEntry }) {
   return (
     <div className="space-y-6">
       <div className="flex items-center gap-3 mb-6">
-        <TrendingUp className="w-8 h-8 text-orange-500" />
+        <TrendingUp className="w-8 h-8 text-red-600" />
         <h2 className="text-3xl font-black uppercase italic">
-          Track Your <span className="text-orange-500">Progress</span>
+          Track Your <span className="text-red-600">Progress</span>
         </h2>
       </div>
 
       {/* Metric Selector */}
       <Card>
-        <h3 className="text-xl font-bold mb-4 text-orange-500">Select Metric</h3>
+        <h3 className="text-xl font-bold mb-4 text-red-600">Select Metric</h3>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
           {[...BODY_MEASUREMENTS, ...EXERCISE_TYPES].map((m) => (
             <button
               key={m.id}
               onClick={() => setMetric(m.id)}
               className={`flex flex-col items-center justify-center p-4 rounded-xl border transition-all duration-300 ${metric === m.id
-                  ? "bg-gradient-to-br from-orange-600 to-red-600 border-transparent text-white shadow-lg shadow-orange-900/30 transform scale-105"
-                  : "bg-neutral-900/50 border-white/5 text-gray-400 hover:border-orange-500/50 hover:text-white hover:bg-neutral-800"
+                  ? "bg-gradient-to-br from-orange-600 to-red-600 border-transparent text-white shadow-lg shadow-red-900/30 transform scale-105"
+                  : "bg-neutral-900/50 border-white/5 text-gray-400 hover:border-red-600/50 hover:text-white hover:bg-neutral-800"
                 }`}
             >
               <div className={`p-2 rounded-lg mb-2 ${metric === m.id ? "bg-white/20" : "bg-neutral-800"
                 }`}>
                 {EXERCISE_TYPES.some(e => e.id === m.id) ? (
-                  <Dumbbell className={`w-5 h-5 ${metric === m.id ? "text-white" : "text-orange-500"}`} />
+                  <Dumbbell className={`w-5 h-5 ${metric === m.id ? "text-white" : "text-red-600"}`} />
                 ) : (
-                  <Activity className={`w-5 h-5 ${metric === m.id ? "text-white" : "text-orange-500"}`} />
+                  <Activity className={`w-5 h-5 ${metric === m.id ? "text-white" : "text-red-600"}`} />
                 )}
               </div>
               <span className="font-bold text-sm text-center">{m.label}</span>
@@ -75,7 +75,7 @@ export default function ProgressTab({ currentUser, data, addEntry }) {
 
       {/* Add Entry Form */}
       <Card>
-        <h3 className="text-xl font-bold mb-4 text-orange-500">Add New Entry</h3>
+        <h3 className="text-xl font-bold mb-4 text-red-600">Add New Entry</h3>
         <form onSubmit={handleSubmit} className="space-y-4">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             <Input
@@ -104,7 +104,7 @@ export default function ProgressTab({ currentUser, data, addEntry }) {
 
       {/* Chart */}
       <Card>
-        <h3 className="text-xl font-bold mb-4 text-orange-500">
+        <h3 className="text-xl font-bold mb-4 text-red-600">
           {metric} Progress
         </h3>
         {chartData.length > 0 ? (
@@ -123,14 +123,14 @@ export default function ProgressTab({ currentUser, data, addEntry }) {
                   border: "1px solid #374151",
                   borderRadius: "8px",
                 }}
-                labelStyle={{ color: "#F97316" }}
+                labelStyle={{ color: "rgb(220 38 38)" }}
               />
               <Line
                 type="monotone"
                 dataKey="value"
-                stroke="#F97316"
+                stroke="rgb(220 38 38)"
                 strokeWidth={3}
-                dot={{ fill: "#F97316", r: 5 }}
+                dot={{ fill: "rgb(220 38 38)", r: 5 }}
               />
             </LineChart>
           </ResponsiveContainer>
@@ -144,7 +144,7 @@ export default function ProgressTab({ currentUser, data, addEntry }) {
       {/* Recent Entries */}
       {chartData.length > 0 && (
         <Card>
-          <h3 className="text-xl font-bold mb-4 text-orange-500">Recent Entries</h3>
+          <h3 className="text-xl font-bold mb-4 text-red-600">Recent Entries</h3>
           <div className="space-y-2">
             {[...chartData].reverse().slice(0, 5).map((entry, idx) => (
               <div

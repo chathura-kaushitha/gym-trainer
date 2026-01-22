@@ -38,10 +38,10 @@ export default function AboutUs() {
     <div className="min-h-screen">
       {/* Hero Section */}
       <div className="relative py-20 px-4">
-        <div className="absolute inset-0 bg-gradient-to-br from-orange-500/10 to-red-500/10 blur-3xl"></div>
+        <div className="absolute inset-0 bg-gradient-to-br from-red-600/10 to-red-500/10 blur-3xl"></div>
         <div className="relative z-10 max-w-4xl mx-auto text-center">
           <h1 className="text-5xl md:text-6xl font-black uppercase italic mb-6">
-            About <span className="text-orange-500">Gym Trainer</span>
+            About <span className="text-red-600">Gym Trainer</span>
           </h1>
           <p className="text-xl text-gray-300 leading-relaxed">
             We're more than just a gym - we're a community dedicated to transforming lives 
@@ -56,7 +56,7 @@ export default function AboutUs() {
         <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
           {stats.map((stat, idx) => (
             <Card key={idx} className="text-center">
-              <stat.icon className="w-12 h-12 text-orange-500 mx-auto mb-4" />
+              <stat.icon className="w-12 h-12 text-red-600 mx-auto mb-4" />
               <div className="text-4xl font-black text-white mb-2">{stat.value}</div>
               <div className="text-gray-400 font-semibold">{stat.label}</div>
             </Card>
@@ -68,7 +68,7 @@ export default function AboutUs() {
       <div className="max-w-7xl mx-auto px-4 py-12">
         <Card>
           <h2 className="text-3xl font-black uppercase italic mb-6 text-center">
-            Our <span className="text-orange-500">Mission</span>
+            Our <span className="text-red-600">Mission</span>
           </h2>
           <p className="text-gray-300 text-lg leading-relaxed text-center max-w-3xl mx-auto">
             At Gym Trainer, we believe that fitness is not just about physical transformation - 
@@ -82,7 +82,7 @@ export default function AboutUs() {
       {/* Why Choose Us */}
       <div className="max-w-7xl mx-auto px-4 py-12">
         <h2 className="text-4xl font-black uppercase italic text-center mb-12">
-          Why Choose <span className="text-orange-500">Us</span>
+          Why Choose <span className="text-red-600">Us</span>
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {features.map((feature, idx) => (
@@ -104,7 +104,7 @@ export default function AboutUs() {
       {/* Our Coaches */}
       <div className="max-w-7xl mx-auto px-4 py-12">
         <h2 className="text-4xl font-black uppercase italic text-center mb-12">
-          Meet Our <span className="text-orange-500">Expert Coaches</span>
+          Meet Our <span className="text-red-600">Expert Coaches</span>
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
           {COACHES.map((coach) => (
@@ -115,7 +115,7 @@ export default function AboutUs() {
                 className="w-full h-48 object-cover rounded-xl mb-4"
               />
               <h3 className="text-xl font-bold text-white">{coach.name}</h3>
-              <p className="text-orange-500 font-semibold">{coach.role}</p>
+              <p className="text-red-600 font-semibold">{coach.role}</p>
             </Card>
           ))}
         </div>
@@ -125,12 +125,12 @@ export default function AboutUs() {
       <div className="max-w-4xl mx-auto px-4 py-12">
         <Card className="text-center">
           <h2 className="text-3xl font-black uppercase italic mb-4">
-            Ready to Start Your <span className="text-orange-500">Journey?</span>
+            Ready to Start Your <span className="text-red-600">Journey?</span>
           </h2>
           <p className="text-gray-300 mb-6">
             Join hundreds of members who have already transformed their lives with us.
           </p>
-          <button className="px-8 py-3 bg-gradient-to-r from-orange-600 to-red-600 text-white font-bold rounded-xl hover:from-orange-500 hover:to-red-500 transition-all">
+          <button className="px-8 py-3 bg-gradient-to-r from-orange-600 to-red-600 text-white font-bold rounded-xl hover:from-red-600 hover:to-red-500 transition-all">
             Get Started Today
           </button>
         </Card>

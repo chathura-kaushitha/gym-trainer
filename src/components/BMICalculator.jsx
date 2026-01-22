@@ -28,7 +28,7 @@ export default function BMICalculator() {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center bg-neutral-900/50 border border-neutral-800 rounded-3xl p-8">
         <div>
           <h2 className="text-3xl font-black text-white mb-4 uppercase italic flex items-center gap-3">
-            <Calculator className="text-orange-500 w-8 h-8" /> BMI Calculator
+            <Calculator className="text-red-600 w-8 h-8" /> BMI Calculator
           </h2>
 
           <div className="space-y-4">
@@ -38,14 +38,14 @@ export default function BMICalculator() {
                 placeholder="Height (cm)"
                 value={height}
                 onChange={(e) => setHeight(e.target.value)}
-                className="bg-neutral-800 border border-neutral-700 rounded-xl px-4 py-3 text-white focus:border-orange-500 outline-none"
+                className="bg-neutral-800 border border-neutral-700 rounded-xl px-4 py-3 text-white focus:border-red-600 outline-none"
               />
               <input
                 type="number"
                 placeholder="Weight (kg)"
                 value={weight}
                 onChange={(e) => setWeight(e.target.value)}
-                className="bg-neutral-800 border border-neutral-700 rounded-xl px-4 py-3 text-white focus:border-orange-500 outline-none"
+                className="bg-neutral-800 border border-neutral-700 rounded-xl px-4 py-3 text-white focus:border-red-600 outline-none"
               />
             </div>
 

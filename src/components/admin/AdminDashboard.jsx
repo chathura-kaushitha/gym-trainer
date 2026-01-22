@@ -59,7 +59,7 @@ export default function AdminDashboard({ currentUser, onLogout, users, setUsers,
             <div className="flex flex-col md:flex-row justify-between items-center mb-8 gap-4">
                 <div>
                     <h1 className="text-3xl font-black uppercase italic">
-                        <span className="text-orange-500">{currentUser.role === 'owner' ? 'Super Admin' : 'Admin'}</span> Dashboard
+                        <span className="text-red-600">{currentUser.role === 'owner' ? 'Super Admin' : 'Admin'}</span> Dashboard
                     </h1>
                     <p className="text-gray-400">Welcome back, {currentUser.name}</p>
                 </div>
@@ -70,14 +70,14 @@ export default function AdminDashboard({ currentUser, onLogout, users, setUsers,
             <div className="flex gap-4 mb-8 border-b border-white/10 pb-1">
                 <button
                     onClick={() => setActiveTab("dashboard")}
-                    className={`px-4 py-2 font-bold uppercase transition-colors ${activeTab === "dashboard" ? "text-orange-500 border-b-2 border-orange-500" : "text-gray-400 hover:text-white"}`}
+                    className={`px-4 py-2 font-bold uppercase transition-colors ${activeTab === "dashboard" ? "text-red-600 border-b-2 border-red-600" : "text-gray-400 hover:text-white"}`}
                 >
                     Overview
                 </button>
                 {currentUser.role === 'owner' && (
                     <button
                         onClick={() => setActiveTab("admins")}
-                        className={`px-4 py-2 font-bold uppercase transition-colors ${activeTab === "admins" ? "text-orange-500 border-b-2 border-orange-500" : "text-gray-400 hover:text-white"}`}
+                        className={`px-4 py-2 font-bold uppercase transition-colors ${activeTab === "admins" ? "text-red-600 border-b-2 border-red-600" : "text-gray-400 hover:text-white"}`}
                     >
                         Manage Admins
                     </button>
@@ -88,13 +88,13 @@ export default function AdminDashboard({ currentUser, onLogout, users, setUsers,
                 <div className="space-y-8">
                     {/* Stats Cards */}
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                        <Card className="border border-white/5 hover:border-orange-500/50 transition-all duration-300 bg-neutral-900/50">
+                        <Card className="border border-white/5 hover:border-red-600/50 transition-all duration-300 bg-neutral-900/50">
                             <div className="flex justify-between items-center">
                                 <div>
                                     <p className="text-gray-400 text-xs font-bold uppercase tracking-wider">Total Users</p>
                                     <h3 className="text-4xl font-black mt-2 text-white">{activeUsers.length}</h3>
                                 </div>
-                                <div className="p-3 rounded-xl bg-orange-500/10 text-orange-500">
+                                <div className="p-3 rounded-xl bg-red-600/10 text-red-600">
                                     <Users className="w-8 h-8" />
                                 </div>
                             </div>
@@ -166,7 +166,7 @@ export default function AdminDashboard({ currentUser, onLogout, users, setUsers,
                     <section>
                         <div className="flex flex-col md:flex-row justify-between items-center mb-6 gap-4">
                             <h2 className="text-2xl font-bold flex items-center gap-2">
-                                <Users className="w-6 h-6 text-orange-500" /> User Management
+                                <Users className="w-6 h-6 text-red-600" /> User Management
                             </h2>
                             <div className="relative w-full md:w-64">
                                 <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-500" />
@@ -175,21 +175,21 @@ export default function AdminDashboard({ currentUser, onLogout, users, setUsers,
                                     placeholder="Search users..."
                                     value={searchTerm}
                                     onChange={(e) => setSearchTerm(e.target.value)}
-                                    className="w-full bg-neutral-900 border border-neutral-800 rounded-lg pl-9 pr-4 py-2 outline-none focus:border-orange-500 transition-colors"
+                                    className="w-full bg-neutral-900 border border-neutral-800 rounded-lg pl-9 pr-4 py-2 outline-none focus:border-red-600 transition-colors"
                                 />
                             </div>
                         </div>
 
                         <div className="grid gap-4">
                             {filteredUsers.map(user => (
-                                <Card key={user.uid} className="group hover:border-orange-500/30 transition-all">
+                                <Card key={user.uid} className="group hover:border-red-600/30 transition-all">
                                     <div className="flex flex-col md:flex-row justify-between items-center gap-4">
                                         <div className="flex items-center gap-4">
-                                            <div className="w-12 h-12 bg-neutral-800 rounded-full flex items-center justify-center font-bold text-gray-400 group-hover:text-orange-500 transition-colors">
+                                            <div className="w-12 h-12 bg-neutral-800 rounded-full flex items-center justify-center font-bold text-gray-400 group-hover:text-red-600 transition-colors">
                                                 {user.name.charAt(0)}
                                             </div>
                                             <div>
-                                                <h3 className="font-bold text-lg group-hover:text-orange-500 transition-colors">{user.name}</h3>
+                                                <h3 className="font-bold text-lg group-hover:text-red-600 transition-colors">{user.name}</h3>
                                                 <p className="text-sm text-gray-400">{user.email}</p>
                                             </div>
                                         </div>

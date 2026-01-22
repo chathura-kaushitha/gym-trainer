@@ -14,7 +14,7 @@ export default function OverviewTab({ currentUser, progressData }) {
       <div className="border-l-4 border-orange-600 pl-4">
         <h1 className="text-4xl font-black uppercase italic">
           <span className="text-white">Dashboard</span>
-          <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-500 to-red-600"> Overview</span>
+          <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-600 to-red-600"> Overview</span>
         </h1>
         <p className="text-gray-400 mt-2">Track your fitness journey and progress</p>
       </div>
@@ -22,25 +22,25 @@ export default function OverviewTab({ currentUser, progressData }) {
       {/* User Details Section */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
         <Card className="text-center">
-          <h3 className="text-xs font-black text-orange-500 uppercase mb-2 tracking-wider">User Name</h3>
+          <h3 className="text-xs font-black text-red-600 uppercase mb-2 tracking-wider">User Name</h3>
           <p className="text-xl font-black truncate">{currentUser.name}</p>
         </Card>
         <Card className="text-center">
-          <h3 className="text-xs font-black text-orange-500 uppercase mb-2 tracking-wider">Member Since</h3>
+          <h3 className="text-xs font-black text-red-600 uppercase mb-2 tracking-wider">Member Since</h3>
           <p className="text-xl font-black">
             {new Date(currentUser.joinedAt).toLocaleDateString()}
           </p>
         </Card>
         <Card className="text-center">
-          <h3 className="text-xs font-black text-orange-500 uppercase mb-2 tracking-wider">Current Weight</h3>
+          <h3 className="text-xs font-black text-red-600 uppercase mb-2 tracking-wider">Current Weight</h3>
           <p className="text-xl font-black">{latestWeight} <span className="text-sm text-gray-400">kg</span></p>
         </Card>
         <Card className="text-center">
-          <h3 className="text-xs font-black text-orange-500 uppercase mb-2 tracking-wider">Height</h3>
+          <h3 className="text-xs font-black text-red-600 uppercase mb-2 tracking-wider">Height</h3>
           <p className="text-xl font-black">{currentUser.height || "175"} <span className="text-sm text-gray-400">cm</span></p>
         </Card>
         <Card className="text-center">
-          <h3 className="text-xs font-black text-orange-500 uppercase mb-2 tracking-wider">Target Goal</h3>
+          <h3 className="text-xs font-black text-red-600 uppercase mb-2 tracking-wider">Target Goal</h3>
           <p className="text-xl font-black truncate">{currentUser.targetMuscle}</p>
         </Card>
       </div>
@@ -49,7 +49,7 @@ export default function OverviewTab({ currentUser, progressData }) {
       <section>
         <div className="border-l-4 border-orange-600 pl-4 mb-6">
           <h2 className="text-3xl font-black uppercase italic">
-            Transformation <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-500 to-red-600">Journey</span>
+            Transformation <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-600 to-red-600">Journey</span>
           </h2>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -70,10 +70,10 @@ export default function OverviewTab({ currentUser, progressData }) {
           <Card className="overflow-hidden">
             <div className="text-center mb-4">
               <h3 className="text-2xl font-black uppercase tracking-wider">
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-500 to-red-600">After</span>
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-600 to-red-600">After</span>
               </h3>
             </div>
-            <div className="aspect-[4/3] bg-neutral-900 rounded-xl overflow-hidden border-2 border-orange-900/30">
+            <div className="aspect-[4/3] bg-neutral-900 rounded-xl overflow-hidden border-2 border-red-900/30">
               <img 
                 src="https://images.unsplash.com/photo-1583454110551-21f2fa2afe61?q=80&w=2070" 
                 alt="After Transformation" 
@@ -90,7 +90,7 @@ export default function OverviewTab({ currentUser, progressData }) {
         <section>
           <div className="border-l-4 border-orange-600 pl-4 mb-6">
             <h2 className="text-2xl font-black uppercase italic">
-              Today's <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-500 to-red-600">Workout</span>
+              Today's <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-600 to-red-600">Workout</span>
             </h2>
           </div>
           <div className="space-y-3">
@@ -115,13 +115,13 @@ export default function OverviewTab({ currentUser, progressData }) {
         <section>
           <div className="border-l-4 border-orange-600 pl-4 mb-6">
             <h2 className="text-2xl font-black uppercase italic">
-              Daily <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-500 to-red-600">Nutrition</span>
+              Daily <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-600 to-red-600">Nutrition</span>
             </h2>
           </div>
           <div className="space-y-3">
             {INITIAL_MEAL_PLAN.slice(0, 3).map((item, idx) => (
               <Card key={idx} className="hover:scale-[1.02] transition-transform">
-                <h3 className="text-base font-black text-transparent bg-clip-text bg-gradient-to-r from-orange-500 to-red-600 uppercase mb-2">{item.meal}</h3>
+                <h3 className="text-base font-black text-transparent bg-clip-text bg-gradient-to-r from-red-600 to-red-600 uppercase mb-2">{item.meal}</h3>
                 <p className="text-gray-300 text-sm leading-relaxed">{item.items}</p>
               </Card>
             ))}

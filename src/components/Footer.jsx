@@ -9,10 +9,10 @@ export default function Footer() {
           {/* About Section */}
           <div className="col-span-1 md:col-span-2">
             <div className="flex items-center gap-3 mb-4">
-              <Dumbbell className="w-8 h-8 text-orange-500" />
+              <Dumbbell className="w-8 h-8 text-red-600" />
               <h3 className="text-2xl font-black uppercase italic">
                 <span className="text-white">Gym</span>
-                <span className="text-orange-500"> Trainer</span>
+                <span className="text-red-600"> Trainer</span>
               </h3>
             </div>
             <p className="text-gray-400 mb-4 max-w-md">
@@ -20,16 +20,16 @@ export default function Footer() {
               and personalized fitness programs. Your journey to a healthier life starts here.
             </p>
             <div className="flex gap-4">
-              <a href="#" className="text-gray-400 hover:text-orange-500 transition-colors">
+              <a href="#" className="text-gray-400 hover:text-red-600 transition-colors">
                 <Facebook className="w-5 h-5" />
               </a>
-              <a href="#" className="text-gray-400 hover:text-orange-500 transition-colors">
+              <a href="#" className="text-gray-400 hover:text-red-600 transition-colors">
                 <Instagram className="w-5 h-5" />
               </a>
-              <a href="#" className="text-gray-400 hover:text-orange-500 transition-colors">
+              <a href="#" className="text-gray-400 hover:text-red-600 transition-colors">
                 <Twitter className="w-5 h-5" />
               </a>
-              <a href="#" className="text-gray-400 hover:text-orange-500 transition-colors">
+              <a href="#" className="text-gray-400 hover:text-red-600 transition-colors">
                 <Youtube className="w-5 h-5" />
               </a>
             </div>
@@ -40,27 +40,27 @@ export default function Footer() {
             <h4 className="text-white font-bold text-lg mb-4 uppercase">Quick Links</h4>
             <ul className="space-y-2">
               <li>
-                <a href="#" className="text-gray-400 hover:text-orange-500 transition-colors">
+                <a href="#" className="text-gray-400 hover:text-red-600 transition-colors">
                   Home
                 </a>
               </li>
               <li>
-                <a href="#" className="text-gray-400 hover:text-orange-500 transition-colors">
+                <a href="#" className="text-gray-400 hover:text-red-600 transition-colors">
                   About Us
                 </a>
               </li>
               <li>
-                <a href="#" className="text-gray-400 hover:text-orange-500 transition-colors">
+                <a href="#" className="text-gray-400 hover:text-red-600 transition-colors">
                   Programs
                 </a>
               </li>
               <li>
-                <a href="#" className="text-gray-400 hover:text-orange-500 transition-colors">
+                <a href="#" className="text-gray-400 hover:text-red-600 transition-colors">
                   Trainers
                 </a>
               </li>
               <li>
-                <a href="#" className="text-gray-400 hover:text-orange-500 transition-colors">
+                <a href="#" className="text-gray-400 hover:text-red-600 transition-colors">
                   Contact
                 </a>
               </li>
@@ -72,15 +72,15 @@ export default function Footer() {
             <h4 className="text-white font-bold text-lg mb-4 uppercase">Contact Us</h4>
             <ul className="space-y-3">
               <li className="flex items-start gap-3 text-gray-400">
-                <Phone className="w-5 h-5 text-orange-500 flex-shrink-0 mt-0.5" />
+                <Phone className="w-5 h-5 text-red-600 flex-shrink-0 mt-0.5" />
                 <span>+94 77 123 4567</span>
               </li>
               <li className="flex items-start gap-3 text-gray-400">
-                <Mail className="w-5 h-5 text-orange-500 flex-shrink-0 mt-0.5" />
+                <Mail className="w-5 h-5 text-red-600 flex-shrink-0 mt-0.5" />
                 <span>info@gymtrainer.lk</span>
               </li>
               <li className="flex items-start gap-3 text-gray-400">
-                <MapPin className="w-5 h-5 text-orange-500 flex-shrink-0 mt-0.5" />
+                <MapPin className="w-5 h-5 text-red-600 flex-shrink-0 mt-0.5" />
                 <span>123 Fitness Street, Colombo 07, Sri Lanka</span>
               </li>
             </ul>

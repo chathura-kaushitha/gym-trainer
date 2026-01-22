@@ -14,9 +14,9 @@ export default function PaymentsTab() {
     return (
         <div className="space-y-6">
             <div className="flex items-center gap-3 mb-6">
-                <CreditCard className="w-8 h-8 text-orange-500" />
+                <CreditCard className="w-8 h-8 text-red-600" />
                 <h2 className="text-3xl font-black uppercase italic">
-                    Payments & <span className="text-orange-500">Reminders</span>
+                    Payments & <span className="text-red-600">Reminders</span>
                 </h2>
             </div>
 
@@ -25,7 +25,7 @@ export default function PaymentsTab() {
                 <Card className="flex flex-col justify-between">
                     <div>
                         <h3 className="text-xl font-bold mb-4 flex items-center gap-2">
-                            <Bell className="w-5 h-5 text-orange-500" />
+                            <Bell className="w-5 h-5 text-red-600" />
                             Payment Reminder
                         </h3>
                         <p className="text-gray-400 mb-6">
@@ -52,7 +52,7 @@ export default function PaymentsTab() {
                     <div className="mt-8 pt-6 border-t border-white/5">
                         <h4 className="text-sm font-bold text-gray-400 uppercase tracking-widest mb-2">Next Payment Due</h4>
                         <p className="text-3xl font-black text-white">
-                            10th <span className="text-orange-500">{currentDate.toLocaleString('default', { month: 'long' })}</span>
+                            10th <span className="text-red-600">{currentDate.toLocaleString('default', { month: 'long' })}</span>
                         </p>
                     </div>
                 </Card>
@@ -60,7 +60,7 @@ export default function PaymentsTab() {
                 {/* Visual Calendar */}
                 <Card>
                     <h3 className="text-xl font-bold mb-4 flex items-center gap-2">
-                        <Calendar className="w-5 h-5 text-orange-500" />
+                        <Calendar className="w-5 h-5 text-red-600" />
                         Payment Calendar
                     </h3>
 
@@ -76,7 +76,7 @@ export default function PaymentsTab() {
                                 key={day}
                                 className={`aspect-square flex items-center justify-center rounded-lg text-sm font-bold relative
                             ${day === 10
-                                        ? 'bg-orange-600 text-white shadow-lg shadow-orange-900/50 scale-110 z-10'
+                                        ? 'bg-orange-600 text-white shadow-lg shadow-red-900/50 scale-110 z-10'
                                         : 'bg-neutral-900/50 text-gray-400 hover:bg-neutral-800'
                                     }
                             ${day === currentDate.getDate() ? 'border border-white/30' : ''}

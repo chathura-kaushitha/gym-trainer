@@ -279,7 +279,7 @@ function App() {
             <div className="w-20 h-20 bg-yellow-500/10 rounded-full flex items-center justify-center mx-auto mb-6">
               <Lock className="w-10 h-10 text-yellow-500" />
             </div>
-            <h2 className="text-3xl font-black uppercase italic mb-4">Waiting for <span className="text-orange-500">Approval</span></h2>
+            <h2 className="text-3xl font-black uppercase italic mb-4">Waiting for <span className="text-red-600">Approval</span></h2>
             <div className="bg-neutral-900 border border-neutral-800 rounded-xl p-6 mb-8">
               <p className="text-gray-300 leading-relaxed">
                 Your account has been created successfully!
@@ -307,7 +307,7 @@ function App() {
                       key={tab}
                       onClick={() => setActiveTab(tab)}
                       className={`px-5 py-2.5 rounded-xl font-black uppercase text-xs tracking-widest transition-all duration-300 ${activeTab === tab
-                        ? "bg-gradient-to-r from-red-600 to-orange-500 text-white shadow-lg shadow-red-900/40 scale-105"
+                        ? "bg-gradient-to-r from-red-600 to-red-600 text-white shadow-lg shadow-red-900/40 scale-105"
                         : "text-gray-400 hover:text-white hover:bg-white/5 border border-transparent"
                         }`}
                     >
@@ -397,7 +397,7 @@ function App() {
             </button>
 
             <h2 className="text-3xl font-black mb-6 uppercase italic text-center">
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-500 to-red-600">
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-600 to-red-600">
                 {authMode === "login" ? "Welcome Back" : "Join Us"}
               </span>
             </h2>
@@ -456,7 +456,7 @@ function App() {
                     <button
                       type="button"
                       onClick={() => setAuthMode("register")}
-                      className="text-orange-500 font-bold hover:text-orange-400 transition-colors"
+                      className="text-red-600 font-bold hover:text-red-500 transition-colors"
                     >
                       Register here
                     </button>
@@ -503,7 +503,7 @@ function App() {
                 <select
                   value={registerData.targetMuscle}
                   onChange={(e) => setRegisterData({ ...registerData, targetMuscle: e.target.value })}
-                  className="w-full bg-neutral-800 border border-neutral-700 rounded-xl px-4 py-3 text-white focus:border-orange-500 outline-none"
+                  className="w-full bg-neutral-800 border border-neutral-700 rounded-xl px-4 py-3 text-white focus:border-red-600 outline-none"
                 >
                   <option value="General Fitness">General Fitness</option>
                   <option value="Weight Loss">Weight Loss</option>
@@ -514,18 +514,18 @@ function App() {
                 </select>
 
                 {/* Terms & Conditions Checkbox */}
-                <label className="flex items-start gap-3 p-3 bg-neutral-900/50 rounded-lg border border-neutral-800 cursor-pointer hover:border-orange-500/30 transition-colors">
+                <label className="flex items-start gap-3 p-3 bg-neutral-900/50 rounded-lg border border-neutral-800 cursor-pointer hover:border-red-600/30 transition-colors">
                   <div className="relative flex items-center mt-1">
                     <input
                       type="checkbox"
                       checked={termsAccepted}
                       onChange={(e) => setTermsAccepted(e.target.checked)}
-                      className="w-5 h-5 appearance-none bg-neutral-800 border-2 border-neutral-600 rounded checked:bg-orange-500 checked:border-orange-500 transition-colors"
+                      className="w-5 h-5 appearance-none bg-neutral-800 border-2 border-neutral-600 rounded checked:bg-red-600 checked:border-red-600 transition-colors"
                     />
                     {termsAccepted && <CheckCircle className="absolute inset-0 w-5 h-5 text-white pointer-events-none" />}
                   </div>
                   <span className="text-sm text-gray-400">
-                    I agree to the <a href="#" className="text-orange-500 hover:underline">Terms of Service</a> and <a href="#" className="text-orange-500 hover:underline">Privacy Policy</a>
+                    I agree to the <a href="#" className="text-red-600 hover:underline">Terms of Service</a> and <a href="#" className="text-red-600 hover:underline">Privacy Policy</a>
                   </span>
                 </label>
 
@@ -565,7 +565,7 @@ function App() {
                     <button
                       type="button"
                       onClick={() => setAuthMode("login")}
-                      className="text-orange-500 font-bold hover:text-orange-400 transition-colors"
+                      className="text-red-600 font-bold hover:text-red-500 transition-colors"
                     >
                       Login here
                     </button>

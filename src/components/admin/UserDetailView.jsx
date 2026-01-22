@@ -17,7 +17,7 @@ export default function UserDetailView({ user, onBack, progressData, onAddProgre
                     <ArrowLeft className="w-4 h-4 mr-2" /> Back to Dashboard
                 </Button>
                 <div>
-                    <h1 className="text-3xl font-black uppercase italic text-orange-500">
+                    <h1 className="text-3xl font-black uppercase italic text-red-600">
                         {user.name}
                     </h1>
                     <p className="text-gray-400">Viewing user dashboard</p>
@@ -31,7 +31,7 @@ export default function UserDetailView({ user, onBack, progressData, onAddProgre
                         key={tab}
                         onClick={() => setActiveTab(tab)}
                         className={`px-4 py-2 rounded-lg font-bold uppercase text-xs tracking-widest transition-all ${activeTab === tab
-                            ? "bg-orange-500 text-white shadow-lg shadow-orange-900/20"
+                            ? "bg-red-600 text-white shadow-lg shadow-red-900/20"
                             : "text-gray-400 hover:text-white hover:bg-white/5"
                             }`}
                     >

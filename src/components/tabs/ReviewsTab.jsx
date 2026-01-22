@@ -32,7 +32,7 @@ export default function ReviewsTab() {
     };
 
     return (
-        <div className="max-w-6xl mx-auto space-y-12 pb-12">
+        <div className="max-w-4xl mx-auto space-y-12 pb-12 px-4">
             {/* Header Section */}
             <div className="text-center space-y-4">
                 <div className="inline-flex items-center justify-center p-3 bg-gradient-to-br from-red-500/20 to-red-600/20 rounded-2xl border border-red-500/30 mb-2">

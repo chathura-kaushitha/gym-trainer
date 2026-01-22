@@ -10,7 +10,7 @@ export default function Button({
   disabled = false,
 }) {
   const baseStyle =
-    "rounded-xl font-black uppercase tracking-wider transition-all duration-200 transform active:scale-95 flex items-center justify-center gap-2 border-b-4";
+    "rounded-xl font-black uppercase tracking-wider transition-all duration-200 transform active:scale-95 flex items-center justify-center gap-2";
 
   const sizes = {
     default: "px-6 py-3 text-sm",
@@ -20,13 +20,13 @@ export default function Button({
 
   const variants = {
     primary:
-      "bg-gradient-to-r from-orange-600 to-orange-500 hover:from-orange-500 hover:to-orange-400 text-white border-orange-800 active:translate-y-1 active:border-b-0",
+      "bg-gradient-to-r from-red-600 to-orange-500 hover:from-red-500 hover:to-orange-400 text-white border-red-800 active:translate-y-1 active:border-b-0",
     secondary:
       "bg-gradient-to-r from-red-600 to-red-500 hover:from-red-500 hover:to-red-400 text-white border-red-800 active:translate-y-1 active:border-b-0",
     outline:
       "bg-neutral-950 text-orange-500 border-black hover:bg-neutral-900 hover:text-orange-400 active:translate-y-1 active:border-b-0",
     ghost: "bg-transparent text-gray-400 hover:text-white border-transparent",
-    flat: "bg-gradient-to-r from-orange-600 to-orange-500 hover:from-orange-500 hover:to-orange-400 text-white border-b-0 active:scale-95 active:translate-y-0",
+    flat: "bg-gradient-to-r from-red-600 to-orange-500 hover:from-red-500 hover:to-orange-400 text-white border-b-0 active:scale-95 active:translate-y-0",
   };
 
   return (
